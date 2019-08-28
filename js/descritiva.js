@@ -11,7 +11,7 @@ let input2 = ['EF', 'EF', 'EF', 'EF', 'EM', 'EM', 'EM', 'EM', 'ES', 'PG', 'PG', 
 let input3 = [37, 34, 20, 43, 37, 55, 27, 37, 23, 46, 56, 43, 60, 32, 27, 60, 53, 51, 45, 45, 28, 41, 38, 38, 56, 65, 63, 23, 56, 34, 27, 34, 38, 30, 29, 47, 47, 45, 42, 55, 50, 35];
 let input4 = ['Preta', 'Rosa', 'Rosa', 'Branca', 'Rosa', 'Azul', 'Amarela', 'Preta', 'Branca', 'Rosa', 'Preta', 'Amarela', 'Rosa', 'Branca', 'Branca', 'Azul', 'Rosa', 'Amarela', 'Rosa', 'Branca', 'Branca', 'Azul', 'Branca', 'Branca', 'Branca', 'Branca', 'Azul', 'Branca', 'Rosa', 'Preta'];
 
-function varClass(inputs) {
+function varClass(inputs) { //Função para idendificar as variaveis
 	inputs.sort();
 	let aux = [];
 	let results;
