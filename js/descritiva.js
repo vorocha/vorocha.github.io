@@ -6,45 +6,63 @@ app.controller('MainCtrl', function($scope) {
 });
 
 //##############################################   MANUAL
-let input1 = ['2000', 3000, 4000, 4000, 3000, 2000, 5000, 2000, 3000, 3000, 3000, 2000, 4000, 4000, 3000, 5000, 4000, 3000, 4000, 3000];
+let input1 = [2000, 3000, 4000, 4000, 3000, 2000, 5000, 2000, 3000, 3000, 3000, 2000, 4000, 4000, 3000, 5000, 4000, 3000, 4000, 3000];
 let input2 = ['EF', 'EF', 'EF', 'EF', 'EM', 'EM', 'EM', 'EM', 'ES', 'PG', 'PG', 'ES', 'ES', 'ES', 'PG', 'PG', 'ES', 'ES', 'ES', 'ES', 'EM', 'EM', 'EM', 'EM', 'EM', 'EF', 'EF', 'PG', 'PG', 'ES'];
 let input3 = [37, 34, 20, 43, 37, 55, 27, 37, 23, 46, 56, 43, 60, 32, 27, 60, 53, 51, 45, 45, 28, 41, 38, 38, 56, 65, 63, 23, 56, 34, 27, 34, 38, 30, 29, 47, 47, 45, 42, 55, 50, 35];
 let input4 = ['Preta', 'Rosa', 'Rosa', 'Branca', 'Rosa', 'Azul', 'Amarela', 'Preta', 'Branca', 'Rosa', 'Preta', 'Amarela', 'Rosa', 'Branca', 'Branca', 'Azul', 'Rosa', 'Amarela', 'Rosa', 'Branca', 'Branca', 'Azul', 'Branca', 'Branca', 'Branca', 'Branca', 'Azul', 'Branca', 'Rosa', 'Preta'];
 
-function varClass(inputs) { //Função para idendificar as variaveis
+
+function drawTable(inputs){
+	
+
+}
+
+function doDescriptive(inputs){ //Chamada inicial para processo da estatistica descritiva
+	//faz chamada para tabela simples
+	let tableObj = getSimple(inputs);
+	//descobre o tipo de variavel
+	let descriptiveClass = getClass(inputs, tableObj.length);
+	
+	//continua com a tabela simples ou vai para a de intervalos
+	if(descriptiveClass != "INTERVAL-NUMBER"){
+		tableObj = getSimple(inputs);
+	} else {
+		tableObj = getInterval(tableObj, inputs);
+	}
+	//adiciona as frequencias
+	addFreqs(tableObj, inputs);
+
+	console.log(tableObj);
+}
+
+function getClass(inputs, varQtd) { //Função para retornar o tipo da variavél a ser trabalhada
 	inputs.sort();
 	let aux = [];
-	let results;
+	let varClass;
 	
 	for(let i = 0; i < inputs.length; i++){
 		aux[i] = isNaN(inputs[i]) ? 0 : 1;
 	}
 	
 	if(aux.indexOf(0) == 0 || aux.indexOf(1) == -1){
-		console.log("FULL TEXT");
-		console.log("SIMPLES")
-		results = varQtd(inputs);
-		console.log(results);
+		varClass = "SIMPLE-TEXT";
 	} else if(aux.indexOf(0) == -1 || aux.indexOf(1) == 0){
-		console.log("FULL NUMBER");
 		for(let i = 0; i < inputs.length; i++){
 			inputs[i] = parseFloat(inputs[i]);
 		}
-		results = varQtd(inputs);
-		if(results.length > 6){
-			console.log("INTERVALOS")
-			varIntervals(results, inputs);
+		if(varQtd > 6){
+			varClass = "INTERVAL-NUMBER";
 		} else {
-			console.log("SIMPLES");
-			results = varQtd(inputs);
-			console.log(results);
+			varClass = "SIMPLE-NUMBER";
 		}
 	} else {
-		console.log("ERROR");
+		varClass = "ERROR";
 	}
+	return varClass;
 }
 
-function varQtd(inputs){
+function getSimple(inputs){ //cria uma tabela simples(nome da variavel e frequencia simples)
+	inputs.sort();
 	let vetQtd = [];
 	let findFlag = false, findPos = -1;
 	
@@ -68,16 +86,13 @@ function varQtd(inputs){
 	return vetQtd;
 }
 
-function varIntervals(vetQtd, inputs){
-	console.log(vetQtd);
+function getInterval(vetQtd, inputs){ //cria uma tabela com intervalos (minimo, maximo e frequencia simples)
+	//calculos para definir linhas e intervalos
 	let minAll = vetQtd[0].name;
 	let maxAll = vetQtd[vetQtd.length-1].name
-	let At = maxAll - minAll;
-	console.log(At);
-	
+	let At = maxAll - minAll;	
 	let K = Math.floor(Math.sqrt(inputs.length));
 	let vetK = [K-1, K, K+1];
-	console.log(vetK);
 	
 	for(let i = At+1; i != 0; i++){
 		if(i%vetK[0] == 0){
@@ -94,11 +109,9 @@ function varIntervals(vetQtd, inputs){
 			break;
 		}
 	}
-	console.log(At);
-	console.log(K);
-	let Ic = At/K;
-	console.log(Ic);
-	
+	let Ic = At/K;	
+
+	//calculo da frequencia
 	let vetIntervals = [];
 	let minIntervals = minAll;
 	let maxIntervals = minAll + Ic;
@@ -113,9 +126,28 @@ function varIntervals(vetQtd, inputs){
 		minIntervals = maxIntervals;
 		maxIntervals = minIntervals + Ic;
 	}
-	console.log(vetIntervals);
+	return vetIntervals;
 }
 
+function addFreqs(tableObj, inputs){ //adciona as frequencias para uma tabela ja criada, simples ou de intervalos
+	let totalQtd = inputs.length;	
+	let prevfRp = 0;
+	let prevFac = 0;
+	let prevFacp = 0;
+
+	for(let obj of tableObj){
+		//percentual individual
+		obj.fRp = Math.round(((obj.qtd*100)/totalQtd)* 100) / 100;
+
+		//frequencia acumulada
+		obj.Fac = prevFac + obj.qtd;
+		prevFac = obj.Fac;
+
+		//frequencia acumulada percentual
+		obj.Facp = prevFacp + obj.fRp;
+		prevFacp = obj.Facp;
+	}	
+}
 
 //##############################################   UPLOAD
 function handleFiles(files) {
