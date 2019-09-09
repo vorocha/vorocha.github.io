@@ -1,4 +1,5 @@
-/*/##############################################   ANGULAR
+/*
+//##############################################   ANGULAR
 var app = angular.module('spFatec', []);
 
 app.controller('MainCtrl', function($scope) {
@@ -17,7 +18,7 @@ function drawTable(inputs){
 
 }
 
-function doDescriptive(inputs, varName){ //Chamada inicial para processo da estatistica descritiva
+function doDescriptive(inputs){ //Chamada inicial para processo da estatistica descritiva
 	//faz chamada para tabela simples
 	let tableObj = getSimple(inputs);
 	//descobre o tipo de variavel
@@ -30,23 +31,10 @@ function doDescriptive(inputs, varName){ //Chamada inicial para processo da esta
 		tableObj = getSimple(inputs);
 		tableObj = getInterval(tableObj, inputs);
 	}
-
 	//adiciona as frequencias
 	addFreqs(tableObj, inputs);
 
-	//retona obj com calculos de tendencia central
-	let centralTendency = calcCentralTendency(tableObj, descriptiveClass, inputs);
-
-
 	console.log(tableObj);
-	console.log(centralTendency);
-	if(descriptiveClass != "INTERVAL-NUMBER"){
-		//colunas
-	} else {
-		drawIntervalTable(tableObj, varName);
-		drawIntervalChart(inputs, tableObj, varName);
-	}
-	
 }
 
 function getClass(inputs, varQtd) { //Função para retornar o tipo da variavél a ser trabalhada
@@ -148,122 +136,19 @@ function addFreqs(tableObj, inputs){ //adciona as frequencias para uma tabela ja
 	let prevfRp = 0;
 	let prevFac = 0;
 	let prevFacp = 0;
-	let round = 0;
 
 	for(let obj of tableObj){
 		//percentual individual
-		obj.fRp = Math.round(((obj.qtd*100)/totalQtd)* 10) / 10;
+		obj.fRp = Math.round(((obj.qtd*100)/totalQtd)* 100) / 100;
 
 		//frequencia acumulada
 		obj.Fac = prevFac + obj.qtd;
 		prevFac = obj.Fac;
 
 		//frequencia acumulada percentual
-		round = Math.round((((prevFacp + obj.fRp)))* 10) / 10;
-		obj.Facp = round;
+		obj.Facp = prevFacp + obj.fRp;
 		prevFacp = obj.Facp;
 	}	
-}
-
-function calcCentralTendency(tableObj, descriptiveClass, inputs){//faz os calculos de tendencia central
-	let obj = {
-		media: null,
-		moda: null,
-		mediana: null
-	}
-
-	obj.media = calcMedia(tableObj, descriptiveClass, inputs.length);
-	obj.moda = calcModa(tableObj, descriptiveClass);
-	obj.mediana = calcMediana(tableObj, descriptiveClass, inputs.length);
-
-	return obj;
-}
-
-function calcMedia(tableObj, descriptiveClass, numElements){
-
-	let sum = 0;
-	let midPoint = 0;
-
-	if(descriptiveClass == "SIMPLE-TEXT"){
-		return "Não existe Média";
-	} else if(descriptiveClass == "SIMPLE-NUMBER"){		
-		for(let obj of tableObj){
-			sum += obj.name * obj.qtd;
-		}		
-	} else if(descriptiveClass == "INTERVAL-NUMBER"){
-		for(let obj of tableObj){
-			midPoint = (obj.min + obj.max)/2;
-			sum += midPoint * obj.qtd;
-		}
-	}
-	return sum/numElements;
-}
-
-function calcModa(tableObj, descriptiveClass){
-	let moda = [];
-	let maxRep = 0;
-	let aux = 0;
-
-	for(let obj of tableObj){
-		aux = obj.qtd;
-		if(aux > maxRep){
-			maxRep = aux;
-		}
-	}
-	for(let obj of tableObj){
-		if(obj.qtd == maxRep){
-			if(descriptiveClass == "INTERVAL-NUMBER"){
-				moda.push((obj.min + obj.max)/2);
-			} else {
-				moda.push(obj.name);
-			}
-		}
-	}
-	if(moda.length == tableObj.length){
-		return "Não existe Moda";
-	} else {
-		return moda;
-	}	
-}
-
-function calcMediana(tableObj, descriptiveClass, numElements){
-	let mediana = [];
-	let medianaPos = [];
-	let medianaVal = [];
-	let prevFac = 0;
-
-	if(numElements % 2 == 0){
-		medianaPos.push(numElements/2);
-		medianaPos.push((numElements/2)+1);
-	}else {
-		medianaPos.push((numElements + 1) / 2);
-	}
-
-	if(descriptiveClass == "SIMPLE-TEXT" || descriptiveClass == "SIMPLE-NUMBER"){
-		for(let pos of medianaPos){
-			for(let obj of tableObj){
-				if(pos <= obj.Fac){
-					medianaVal.push(obj.name);
-					break;
-				}
-			}
-		}
-		if(descriptiveClass == "SIMPLE-NUMBER"){
-			mediana.push((medianaVal[0] + medianaVal[1])/2);
-		} else {
-			mediana = medianaVal;
-		}
-	}else if(descriptiveClass == "INTERVAL-NUMBER"){
-		for(let obj of tableObj){
-			if(medianaPos[0] <= obj.Fac){
-				let calcMd = obj.min + (((medianaPos[0] - prevFac) / obj.qtd ) * (obj.max - obj.min));
-				mediana.push(calcMd);
-				break;
-			}
-			prevFac = obj.Fac;
-		}
-	}
-	return mediana;
 }
 
 //##############################################   UPLOAD

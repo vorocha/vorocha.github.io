@@ -5,34 +5,23 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title></title>
+    <title>Evolution Statistic</title>
 
     <link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </head>
 
   <body ng-controller="MainCtrl" ng-app="spFatec">
-	<form>
-		<fieldset>
-			<label for="csvFileInput">
-				<strong>Arquivo CSV:</strong>
-			</label>
-			<input type="file" id="csvFileInput" onchange="handleFiles(this.files)"	accept=".csv">
-		</div>
-		</fieldset>
-	</form>
-	
-	<div>
-		<p>Gerando a tabela pelo console<br/>use a função <b>doDescriptive();</b> passe o parametro como vetor <b>[1,2,3,4,5, ...]</b>ou <b>["amarela", "azul", "preto", "azul", ...</b></p>
+	<div class="container">
+		<h1>Index</h1>
+		<a href="descritiva.html">Descritiva</a>
 	</div>
-  
+
 	
-	<script src="js/descritiva.js"></script>
-	<script>
-	
-		
-	</script>
   </body>
 </html>
