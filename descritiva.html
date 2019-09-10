@@ -34,7 +34,7 @@
 			<label for="dataInput">Valores</label>
 			<input type="text" class="form-control" id="dataInput" placeholder="Insira os valores separados por ';' (ponto e virgula)">
 		  </div>
-		  <button type="button" class="btn btn-primary mb-2" onclick="inputToVet();">Calcular</button>
+		  <button type="button" class="btn btn-primary mb-2" onclick="results();">Calcular</button>
 		</form>
 	</div>
 	
@@ -58,11 +58,10 @@
 	<script src="js/graficos.js"></script>
 	<script src="js/tabelas.js"></script>
 	<script>
-		function inputToVet(){
-			let input = document.getElementById("dataInput").value;
-			let varName = document.getElementById("dataVar").value;
-			let resultVet = input.split(";");
-			doDescriptive(resultVet, varName);
+		function results(){
+			let inputValue = document.getElementById("dataInput").value;
+			let varName = document.getElementById("dataVar").value;			
+			doDescriptive(inputValue, varName);
 		}
 	</script>
   </body>

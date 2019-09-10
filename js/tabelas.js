@@ -81,7 +81,13 @@ function drawSimpleTextTable(tableObj, varName){
 	for(let i = 0; i < tableObj.length; i++){
 		tableElement += "<tr>";
 		tableElement += "<th scope='row'>" + (i+1) +"</th>";
-		tableElement += "<td>ud</td>";
+		if(i == 0){
+			tableElement += "<td><span><img class='btn_table_text' src='img/btn_inv.png' /><img class='btn_table_text' src='img/btn_down_arrow.png' /></span></td>";
+		} else if(i == tableObj.length - 1){
+			tableElement += "<td><span><img class='btn_table_text' src='img/btn_up_arrow.png' /><img class='btn_table_text' src='img/btn_inv.png' /></span></td>";
+		} else {
+			tableElement += "<td><span><img class='btn_table_text' src='img/btn_up_arrow.png' /><img class='btn_table_text' src='img/btn_down_arrow.png' /></span></td>";
+		}
 		tableElement += "<td>" + tableObj[i].name +"</td>";
 		tableElement += "<td>" + tableObj[i].qtd + "</td>";
 		tableElement += "<td>" + tableObj[i].fRp + "%</td>";
