@@ -1,3 +1,99 @@
+function drawColumnChart(tableObj, varName){
+
+	let dataColumn = [];
+	for(let obj of tableObj){
+		let aux = {name: null, y: null};
+		aux.name = obj.name;
+		aux.y = obj.fRp;
+		dataColumn.push(aux);
+	}
+
+	Highcharts.chart('resultChart', {
+		chart: {
+			type: 'column'
+		},
+		title: {
+			text: varName
+		},
+		xAxis: {
+			type: 'category'
+		},
+		yAxis: {
+			title: {
+				text: 'Percentual'
+			}
+	
+		},
+		legend: {
+			enabled: false
+		},
+		plotOptions: {
+			series: {
+				borderWidth: 0,
+				dataLabels: {
+					enabled: true,
+					format: '{point.y:.1f}%'
+				}
+			}
+		},
+	
+		tooltip: {
+			headerFormat: '<span style="font-size:11px">{point.name}</span><br>',
+			pointFormat: '<b>{point.y:.1f}%</b><br/>'
+		},
+	
+		series: [
+			{
+				name: "Browsers",
+				colorByPoint: true,
+				data: dataColumn
+			}
+		]
+	});
+}
+
+function drawPieChart(tableObj, varName){
+
+	let dataPie = [];
+	for(let obj of tableObj){
+		let aux = {name: null, y: null};
+		aux.name = obj.name;
+		aux.y = obj.fRp;
+		dataPie.push(aux);
+	}
+
+	Highcharts.chart('resultChart', {
+		chart: {
+			plotBackgroundColor: null,
+			plotBorderWidth: null,
+			plotShadow: false,
+			type: 'pie'
+		},
+		title: {
+			text: varName
+		},
+		tooltip: {
+			pointFormat: '<b>{point.percentage:.1f}%</b>'
+		},
+		plotOptions: {
+			pie: {
+				allowPointSelect: true,
+				cursor: 'pointer',
+				dataLabels: {
+					enabled: true,
+					format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+				},
+				showInLegend: true
+			}
+		},
+		series: [{
+			name: 'Brands',
+			colorByPoint: true,
+			data: dataPie
+		}]
+	});
+}
+
 function drawIntervalChart(inputs, tableObj, varName){
 	
 	var data = inputs;

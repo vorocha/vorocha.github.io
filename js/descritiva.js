@@ -10,12 +10,7 @@ let input1 = [2000, 3000, 4000, 4000, 3000, 2000, 5000, 2000, 3000, 3000, 3000, 
 let input2 = ['EF', 'EF', 'EF', 'EF', 'EM', 'EM', 'EM', 'EM', 'ES', 'PG', 'PG', 'ES', 'ES', 'ES', 'PG', 'PG', 'ES', 'ES', 'ES', 'ES', 'EM', 'EM', 'EM', 'EM', 'EM', 'EF', 'EF', 'PG', 'PG', 'ES'];
 let input3 = [37, 34, 20, 43, 37, 55, 27, 37, 23, 46, 56, 43, 60, 32, 27, 60, 53, 51, 45, 45, 28, 41, 38, 38, 56, 65, 63, 23, 56, 34, 27, 34, 38, 30, 29, 47, 47, 45, 42, 55, 50, 35];
 let input4 = ['Preta', 'Rosa', 'Rosa', 'Branca', 'Rosa', 'Azul', 'Amarela', 'Preta', 'Branca', 'Rosa', 'Preta', 'Amarela', 'Rosa', 'Branca', 'Branca', 'Azul', 'Rosa', 'Amarela', 'Rosa', 'Branca', 'Branca', 'Azul', 'Branca', 'Branca', 'Branca', 'Branca', 'Azul', 'Branca', 'Rosa', 'Preta'];
-
-
-function drawTable(inputs){
-	
-
-}
+let input5 = [6,7,9,10,12,14,15,15,15,16,16,17,18,18,18,18,19,19,20,20,20,20,21,21,21,22,22,23,24,25,25,26,26,28,28,30,32,32,35,39];
 
 function doDescriptive(inputs, varName){ //Chamada inicial para processo da estatistica descritiva
 	//faz chamada para tabela simples
@@ -36,14 +31,28 @@ function doDescriptive(inputs, varName){ //Chamada inicial para processo da esta
 
 	//retona obj com calculos de tendencia central
 	let centralTendency = calcCentralTendency(tableObj, descriptiveClass, inputs);
+	drawCentralTendencyTable(centralTendency);
 
-
-	console.log(tableObj);
-	console.log(centralTendency);
+	//adiciona a tabela e o grafico de acordo com o tipo de variavel
 	if(descriptiveClass != "INTERVAL-NUMBER"){
-		//colunas
+		if(descriptiveClass == "SIMPLE-TEXT"){
+			//tabela simples texto
+			drawSimpleTextTable(tableObj, varName);	
+
+			//grafico pizza
+			drawPieChart(tableObj, varName);
+		} else if(descriptiveClass == "SIMPLE-NUMBER"){
+			//tabela simples numero
+			drawSimpleNumberTable(tableObj, varName);
+
+			//grafico de colunas
+			drawColumnChart(tableObj, varName);
+		}
 	} else {
+		//tabela de intervalos
 		drawIntervalTable(tableObj, varName);
+		
+		//grafico histograma
 		drawIntervalChart(inputs, tableObj, varName);
 	}
 	
