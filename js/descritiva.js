@@ -16,7 +16,6 @@ let ordem = ['Preta', 'Rosa', 'Branca', 'Azul', 'Amarela'];
 
 function standardize(inputsValue){ //padroniza os valores recebidos em string para um vetor de string ou numeros
 	inputsValue.replace(",", "."); //o ponto flutuante em js deve ser o (.) não a (,)
-	inputsValue.replace(" ",""); //remove espaços
 	inputsValue.replace(/(\r\n|\n|\r)/gm,""); //remove quebras de linha
 	let inputs = inputsValue.split(";");// cria o vetor separando a string pelos (;)
 	
@@ -306,7 +305,16 @@ function calcMediana(tableObj, descriptiveClass, numElements){
 			prevFac = obj.Fac;
 		}
 	}
-	return Math.round(mediana * 100) / 100;;
+	if(mediana.length == 1){
+		return Math.round(mediana * 100) / 100;
+	} else {
+		if(mediana[0] == mediana[1]){
+			return mediana[0];
+		} else {
+			return mediana;
+		}
+	}
+	
 }
 
 //##############################################   UPLOAD

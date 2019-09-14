@@ -24,16 +24,26 @@
   <body ng-controller="MainCtrl" ng-app="spFatec">
 	<div class="container">
 		<h1>Descritiva</h1>
-	
+	 
 		<form>
-		  <div class="form-group">
-			<label for="dataVar">Nome da Variável:</label>
-			<input type="text" class="form-control" id="dataVar" placeholder="">
+			<div class="form-group">
+				<label for="dataInput">Valores</label>
+				<input type="text" class="form-control" id="dataInput" placeholder="Insira os valores separados por ';' (ponto e virgula)">
+			</div>
+		  <div class="form-group input-group">
+				<input type="text" class="form-control" id="dataVar" placeholder="Nome da Variável">
+
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				<label class="btn btn-primary active">
+				<input type="radio" name="options" id="option1" autocomplete="off" checked> População
+				</label>
+				<label class="btn btn-primary">
+				<input type="radio" name="options" id="option2" autocomplete="off"> Amostra
+				</label>
+			</div>
 		  </div>
-		  <div class="form-group">
-			<label for="dataInput">Valores</label>
-			<input type="text" class="form-control" id="dataInput" placeholder="Insira os valores separados por ';' (ponto e virgula)">
-		  </div>
+		  <input type="range" class="custom-range" min="0" max="5" id="customRange2" onchange="updateTextInput(this.value);">
+		  <input type="text" id="textInput" value="">
 		  <button type="button" class="btn btn-primary mb-2" onclick="results();">Calcular</button>
 		</form>
 	</div>
@@ -63,6 +73,9 @@
 			let varName = document.getElementById("dataVar").value;			
 			doDescriptive(inputValue, varName);
 		}
+		function updateTextInput(val) {
+          document.getElementById('textInput').value=val; 
+        }
 	</script>
   </body>
 
