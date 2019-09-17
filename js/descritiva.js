@@ -93,6 +93,7 @@ function doDescriptive(inputsValue, varName = "Variável"){ //Chamada inicial pa
 		//grafico histograma
 		drawIntervalChart(orderedInputs, tableObj, varName);
 	}
+	calcSeparatriz(tableObj, descriptiveClass, orderedInputs.length, 5);
 	
 }
 
@@ -306,7 +307,11 @@ function calcMediana(tableObj, descriptiveClass, numElements){
 		}
 	}
 	if(mediana.length == 1){
-		return Math.round(mediana * 100) / 100;
+		if(isNaN(mediana[0])){
+			return mediana[0];
+		} else {
+			return Math.round(mediana[0] * 100) / 100;
+		}		
 	} else {
 		if(mediana[0] == mediana[1]){
 			return mediana[0];
@@ -317,6 +322,32 @@ function calcMediana(tableObj, descriptiveClass, numElements){
 	
 }
 
+function calcSeparatriz(tableObj, descriptiveClass, numElements, percentil){
+
+	let percentilPos = numElements * (percentil/100);
+	let separatriz = undefined;
+	let prevFac = 0;
+
+	if(descriptiveClass != "INTERVAL-NUMBER"){
+		for(let obj of tableObj){
+			if(percentilPos <= obj.Fac){
+				separatriz = obj.name;
+				break;
+			}
+		}
+	} else {
+		for(let obj of tableObj){
+			if(percentilPos <= obj.Fac){
+				let calcMd = obj.min + (((percentilPos - prevFac) / obj.qtd ) * (obj.max - obj.min));
+				separatriz = calcMd;
+				break;
+			}
+			prevFac = obj.Fac;
+		}
+	}
+	console.log(separatriz);
+	return separatriz;
+}
 //##############################################   UPLOAD
 function handleFiles(files) {
 	// Arquivo suportado?

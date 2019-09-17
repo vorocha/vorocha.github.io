@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/css/bootstrap-slider.css" integrity="sha256-+bpMasWDxDlsVpNW3oZlL7L4RacwsP70u2fZt6Rxrmc=" crossorigin="anonymous" />
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -19,6 +19,7 @@
 	<script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.js" integrity="sha256-59/apVFrosMLFX2dHZLGvb3nPpu7e0Yx1rsDr1dTRrk=" crossorigin="anonymous"></script>
   </head>
 
   <body ng-controller="MainCtrl" ng-app="spFatec">
@@ -31,7 +32,7 @@
 				<input type="text" class="form-control" id="dataInput" placeholder="Insira os valores separados por ';' (ponto e virgula)">
 			</div>
 		  <div class="form-group input-group">
-				<input type="text" class="form-control" id="dataVar" placeholder="Nome da Variável">
+			<input type="text" class="form-control" id="dataVar" placeholder="Nome da Variável">
 
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-primary active">
@@ -42,9 +43,22 @@
 				</label>
 			</div>
 		  </div>
-		  <input type="range" class="custom-range" min="0" max="5" id="customRange2" onchange="updateTextInput(this.value);">
-		  <input type="text" id="textInput" value="">
 		  <button type="button" class="btn btn-primary mb-2" onclick="results();">Calcular</button>
+		</form>
+
+		<hr>
+		<form>
+			<div class="form-group input-group">
+				<select class="form-control form-control-sm col-2">
+					<option>Quartil</option>
+					<option>Quintil</option>
+					<option>Decil</option>
+					<option>Porcentil</option>
+				</select>
+				
+				<input id="rangeInput" type="text" data-slider-ticks="[25, 50, 75, 100]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["25", "50", "75", "100"]'/>
+			
+			</div>
 		</form>
 	</div>
 	
@@ -73,9 +87,11 @@
 			let varName = document.getElementById("dataVar").value;			
 			doDescriptive(inputValue, varName);
 		}
-		function updateTextInput(val) {
-          document.getElementById('textInput').value=val; 
-        }
+		$("#rangeInput").slider({
+			ticks: [0, 100, 200, 300, 400],
+			ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+			ticks_snap_bounds: 30
+		});
 	</script>
   </body>
 
