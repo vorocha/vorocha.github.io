@@ -123,3 +123,27 @@ function drawCentralTendencyTable(centralTendency){
 		
 	document.getElementById('centralTendency').innerHTML = tableElement;
 }
+
+function drawSeparatrizDiv(){
+	let divElement;
+	divElement = "<form>";
+	divElement = "<fieldset class='border p-2' style='height: 120px;'><legend class='w-auto'>Medidas Separatrizes</legend>";
+	divElement += "<div class='form-group input-group'>";
+	divElement += "<select id='separatrizSelect' class='form-control-sm col-3' onchange='callSeparatriz();'>";
+	divElement += "<option value='0' >Separatrizes:</option>";
+	divElement += "<option value='4' >Quartil</option>";
+	divElement += "<option value='5' >Quintil</option>";
+	divElement += "<option value='10' >Decil</option>";
+	divElement += "<option value='100' >Porcentil</option>";
+	divElement += "</select>";
+			
+	divElement += "<input id='rangeInput' type='text' style='display: none;'/>";
+			
+	divElement += "<span id='sepTipo'></span>";
+	divElement += "<span id='sepValor'></span>";
+	divElement += "<span id='sepResult'></span>";
+	divElement += "</div>";
+	divElement += "</fieldset></form>";
+	
+	document.getElementById('separatriz').innerHTML = divElement;
+}
