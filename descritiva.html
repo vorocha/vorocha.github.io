@@ -36,10 +36,10 @@
 
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-primary active">
-				<input type="radio" name="options" id="option1" autocomplete="off" checked> População
+				<input type="radio" name="populacaoAmostra" value="populacao" autocomplete="off" checked> População
 				</label>
 				<label class="btn btn-primary">
-				<input type="radio" name="options" id="option2" autocomplete="off"> Amostra
+				<input type="radio" name="populacaoAmostra" value="amostra" autocomplete="off"> Amostra
 				</label>
 			</div>
 		  </div>
@@ -50,6 +50,7 @@
 	<div id="resultTable" class="container"></div>
 	<div id="centralTendency" class="container"></div>
 	<div id="separatriz" class="container"></div>
+	<div id="desvioPadrao" class="container"></div>
 	<div id="resultChart" class="container"></div>
 	
 	<!--
@@ -70,8 +71,10 @@
 	<script>
 		function results(){
 			let inputValue = document.getElementById("dataInput").value;
-			let varName = document.getElementById("dataVar").value;			
-			doDescriptive(inputValue, varName);
+			let varName = document.getElementById("dataVar").value;	
+			let populacaoAmostra = $('input[name=populacaoAmostra]:checked').val();	
+			
+			doDescriptive(inputValue, varName, populacaoAmostra);
 		}		
 	</script>
   </body>

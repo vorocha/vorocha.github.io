@@ -147,3 +147,22 @@ function drawSeparatrizDiv(){
 	
 	document.getElementById('separatriz').innerHTML = divElement;
 }
+function drawDesvioPadraoTable(desvioPadrao, media){
+	let tableElement;
+	tableElement = "<table class='table table-hover table-dark'>";
+	tableElement += "<thead>";
+	tableElement += "<tr>";
+	tableElement += "<th scope='col'>Desvio Padrão</th>";
+	tableElement += "<th scope='col'>Coeficiente de Variação</th>";
+	tableElement += "</tr>";
+	tableElement += "</thead>";
+	tableElement += "<tbody>";
+		tableElement += "<tr>";
+		tableElement += "<td>" + desvioPadrao +"</td>";
+		tableElement += "<td>" + Math.round((desvioPadrao / media) * 10000) / 100 +"%</td>";
+		tableElement += "</tr>";
+	tableElement += "</tbody>";
+	tableElement += "</table>";
+		
+	document.getElementById('desvioPadrao').innerHTML = tableElement;
+}

@@ -7,7 +7,7 @@ app.controller('MainCtrl', function($scope) {
 */
 //##############################################   MANUAL
 let input1 = [2000, 3000, 4000, 4000, 3000, 2000, 5000, 2000, 3000, 3000, 3000, 2000, 4000, 4000, 3000, 5000, 4000, 3000, 4000, 3000];
-let input2 = "EF;EF;EF;EF;EM;EM;EM;EM;ES;PG;PG;ES;ES;ES;PG;PG;ES;ES;ES;ES;EM;EM;EM;EM;EM;EF;EF;PG;PG;ES;";
+let input2 = "EF;EF;EF;EF;EM;EM;EM;EM;ES;PG;PG;ES;ES;ES;PG;PG;ES;ES;ES;ES;EM;EM;EM;EM;EM;EF;EF;PG;PG;ES";
 let input3 = "37;34;20;43;37;55;27;37;23;46;56;43;60;32;27;60;53;51;45;45;28;41;38;38;56;65;63;23;56;34;27;34;38;30;29;47;47;45;42;55;50;35";
 let input4 = ['Preta', 'Rosa', 'Rosa', 'Branca', 'Rosa', 'Azul', 'Amarela', 'Preta', 'Branca', 'Rosa', 'Preta', 'Amarela', 'Rosa', 'Branca', 'Branca', 'Azul', 'Rosa', 'Amarela', 'Rosa', 'Branca', 'Branca', 'Azul', 'Branca', 'Branca', 'Branca', 'Branca', 'Azul', 'Branca', 'Rosa', 'Preta'];
 let input5 = [6,7,9,10,12,14,15,15,15,16,16,17,18,18,18,18,19,19,20,20,20,20,21,21,21,22,22,23,24,25,25,26,26,28,28,30,32,32,35,39];
@@ -53,7 +53,7 @@ function orderBy(inputs, order = "ASC"){//funcao para ordenar seguindo um ordem 
 	return ordered;
 }
 
-function doDescriptive(inputsValue, varName = "Variável"){ //Chamada inicial para processo da estatistica descritiva
+function doDescriptive(inputsValue, varName = "Variável", populacaoAmostra){ //Chamada inicial para processo da estatistica descritiva
 	//padroniza os valores recebidos
 	let inputs = standardize(inputsValue);
 	
@@ -75,9 +75,14 @@ function doDescriptive(inputsValue, varName = "Variável"){ //Chamada inicial pa
 
 	//retona obj com calculos de tendencia central
 	let centralTendency = calcCentralTendency(tableObj, descriptiveClass, orderedInputs);
-	drawCentralTendencyTable(centralTendency);
-	
+	drawCentralTendencyTable(centralTendency);	
+
 	drawSeparatrizDiv();
+	
+	if(descriptiveClass == "SIMPLE-NUMBER" || descriptiveClass == "INTERVAL-NUMBER"){
+		let desvioPadrao = calcDesvioPadrao(tableObj, descriptiveClass, orderedInputs.length, centralTendency.media, populacaoAmostra);
+		drawDesvioPadraoTable(desvioPadrao, centralTendency.media);
+	}
 	
 	//adiciona a tabela e o grafico de acordo com o tipo de variavel
 	if(descriptiveClass != "INTERVAL-NUMBER"){
@@ -329,6 +334,29 @@ function calcMediana(tableObj, descriptiveClass, numElements){
 	}
 	
 }
+function calcDesvioPadrao(tableObj, descriptiveClass, numElements, media, populacaoAmostra){
+	let somatoria = 0;
+	let desvioPadrao = 0;
+
+	if(descriptiveClass == "SIMPLE-NUMBER"){
+		for(let obj of tableObj){
+			somatoria += (Math.pow((obj.name - media), 2)) * obj.qtd;
+		}		
+	} else if(descriptiveClass == "INTERVAL-NUMBER"){
+		for(let obj of tableObj){
+			somatoria += (Math.pow(((obj.max + obj.min) / 2) - media, 2)) * obj.qtd;
+		}
+	}
+	console.log(somatoria);
+	if(populacaoAmostra == "populacao"){
+		desvioPadrao = Math.sqrt(somatoria/numElements);
+	} else {
+		desvioPadrao = Math.sqrt(somatoria/(numElements - 1));
+	}
+
+	return Math.round(desvioPadrao * 100) / 100;
+}
+
 function callSeparatriz(){
 	$("#sepTipo").html("");
 	$("#sepValor").html("");
