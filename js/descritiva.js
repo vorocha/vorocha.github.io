@@ -14,14 +14,14 @@ let input5 = [6,7,9,10,12,14,15,15,15,16,16,17,18,18,18,18,19,19,20,20,20,20,21,
 let input6 = [3, 4, 3.5, 5, 3.5, 4, 5, 5.5, 4, 5];
 let ordem = ['Preta', 'Rosa', 'Branca', 'Azul', 'Amarela'];
 
-
+//Variaveis globais para tratamento de valores sem precisar recalcular
 var tableObj;
 var descriptiveClass;
 var orderedInputs;
 
 function standardize(inputsValue){ //padroniza os valores recebidos em string para um vetor de string ou numeros
-	inputsValue.replace(",", "."); //o ponto flutuante em js deve ser o (.) não a (,)
-	inputsValue.replace(/(\r\n|\n|\r)/gm,""); //remove quebras de linha
+	inputsValue = inputsValue.replace(/,/g, "."); //troca a (,). O ponto flutuante em js deve ser o (.) não a (,)
+	inputsValue = inputsValue.replace(/(\r\n|\n|\r)/gm,""); //remove quebras de linha
 	let inputs = inputsValue.split(";");// cria o vetor separando a string pelos (;)
 	
 	//caso a string seja de valores numericos tranforma em tipo number
@@ -38,14 +38,14 @@ function standardize(inputsValue){ //padroniza os valores recebidos em string pa
 	return inputs;
 }
 
-function orderBy(inputs, order = "ASC"){//funcao para ordenar seguindo um ordem pre-definida
+function orderBy(inputs, order){//funcao para ordenar seguindo um ordem pre-definida
 	let ordered = [];
+	ordered = inputs.sort();
+
 	if(order == "ASC"){// crescente
-		ordered = inputs.sort();
 		ordered = ordered.sort(function(a, b){return a-b});
-	} else if(order == "DSC"){//descendente
-		ordered = inputs.sort();
-		ordered = ordered.sort(function(a, b){return b-a});
+	} else if(order == "DSC"){//decrescente		
+		ordered = ordered.sort(function (a, b) {return b.localeCompare(a);});
 	} else {//seguindo um vetor de ordenação
 		ordered = inputs.sort(function(a, b){return order.indexOf(a) - order.indexOf(b);});
 	}
@@ -53,17 +53,54 @@ function orderBy(inputs, order = "ASC"){//funcao para ordenar seguindo um ordem 
 	return ordered;
 }
 
-function doDescriptive(inputsValue, varName = "Variável", populacaoAmostra){ //Chamada inicial para processo da estatistica descritiva
+function reorderDescriptive(posInit, posEnd){
+
+	let order = [];
+	for(let obj of tableObj){
+		order.push(obj.name);
+	}
+
+	let aux = order[posEnd];
+	order[posEnd] = order[posInit];
+	order[posInit] = aux;
+
+	let inputValue = document.getElementById("dataInput").value;
+	let varName = document.getElementById("dataVar").value;	
+	let populacaoAmostra = $('input[name=populacaoAmostra]:checked').val();	
+	if(varName == ""){
+		varName = "Variável";
+	}
+
+	doDescriptive(inputValue, varName, populacaoAmostra, order);
+}
+
+function switchSimple(simple){
+	let inputValue = document.getElementById("dataInput").value;
+	let varName = document.getElementById("dataVar").value;	
+	let populacaoAmostra = $('input[name=populacaoAmostra]:checked').val();	
+	if(varName == ""){
+		varName = "Variável";
+	}
+
+	doDescriptive(inputValue, varName, populacaoAmostra, "ASC", simple);
+}
+
+function doDescriptive(inputsValue, varName, populacaoAmostra, order = "ASC", forceSimple = false){ //Chamada inicial para processo da estatistica descritiva
 	//padroniza os valores recebidos
 	let inputs = standardize(inputsValue);
 	
 	//ordena o vetor em ordem crescente, por padrao
-	orderedInputs = orderBy(inputs);
+	orderedInputs = orderBy(inputs, order);
 	
 	//faz chamada para tabela simples
-	tableObj = getSimple(orderedInputs);	
+	tableObj = getSimple(orderedInputs);
+
 	//descobre o tipo de variavel
-	descriptiveClass = getClass(orderedInputs, tableObj.length);
+	if(forceSimple){
+		descriptiveClass = getClass(orderedInputs, tableObj.length, 999);
+	} else {
+		descriptiveClass = getClass(orderedInputs, tableObj.length);
+	}	
 	
 	//continua com a tabela simples ou vai para a de intervalos
 	if(descriptiveClass == "INTERVAL-NUMBER"){
@@ -73,12 +110,14 @@ function doDescriptive(inputsValue, varName = "Variável", populacaoAmostra){ //
 	//adiciona as frequencias
 	addFreqs(tableObj, orderedInputs);
 
-	//retona obj com calculos de tendencia central
+	//desnha tabela calculos de tendencia central
 	let centralTendency = calcCentralTendency(tableObj, descriptiveClass, orderedInputs);
 	drawCentralTendencyTable(centralTendency);	
 
+	//desenha separatriz
 	drawSeparatrizDiv();
 	
+	//se possivel mostra desvio padrao e coeficiente de variacao
 	if(descriptiveClass == "SIMPLE-NUMBER" || descriptiveClass == "INTERVAL-NUMBER"){
 		let desvioPadrao = calcDesvioPadrao(tableObj, descriptiveClass, orderedInputs.length, centralTendency.media, populacaoAmostra);
 		drawDesvioPadraoTable(desvioPadrao, centralTendency.media);
@@ -105,12 +144,10 @@ function doDescriptive(inputsValue, varName = "Variável", populacaoAmostra){ //
 		
 		//grafico histograma
 		drawIntervalChart(orderedInputs, tableObj, varName);
-	}
-	calcSeparatriz(tableObj, descriptiveClass, orderedInputs.length, 5);
-	
+	}	
 }
 
-function getClass(inputs, varQtd) { //Função para retornar o tipo da variavél a ser trabalhada
+function getClass(inputs, varQtd, minQtd = 7) { //Função para retornar o tipo da variavél a ser trabalhada
 	let aux = [];
 	let varClass;
 	
@@ -121,7 +158,7 @@ function getClass(inputs, varQtd) { //Função para retornar o tipo da variavél
 	if(aux.indexOf(0) == 0 && aux.indexOf(1) == -1){
 		varClass = "SIMPLE-TEXT";
 	} else if(aux.indexOf(0) == -1 && aux.indexOf(1) == 0){
-		if(varQtd > 6){
+		if(varQtd > minQtd){
 			varClass = "INTERVAL-NUMBER";
 		} else {
 			varClass = "SIMPLE-NUMBER";
@@ -235,7 +272,7 @@ function calcCentralTendency(tableObj, descriptiveClass, inputs){//faz os calcul
 	return obj;
 }
 
-function calcMedia(tableObj, descriptiveClass, numElements){
+function calcMedia(tableObj, descriptiveClass, numElements){ //calcula media
 
 	let sum = 0;
 	let midPoint = 0;
@@ -255,7 +292,7 @@ function calcMedia(tableObj, descriptiveClass, numElements){
 	return Math.round((sum/numElements) * 100) / 100;
 }
 
-function calcModa(tableObj, descriptiveClass){
+function calcModa(tableObj, descriptiveClass){ //calcula moda
 	let moda = [];
 	let maxRep = 0;
 	let aux = 0;
@@ -282,7 +319,7 @@ function calcModa(tableObj, descriptiveClass){
 	}	
 }
 
-function calcMediana(tableObj, descriptiveClass, numElements){
+function calcMediana(tableObj, descriptiveClass, numElements){ //calcula mediana
 	let mediana = [];
 	let medianaPos = [];
 	let medianaVal = [];
@@ -304,7 +341,7 @@ function calcMediana(tableObj, descriptiveClass, numElements){
 				}
 			}
 		}
-		if(descriptiveClass == "SIMPLE-NUMBER"){
+		if(descriptiveClass == "SIMPLE-NUMBER" && medianaVal.length > 1){
 			mediana.push((medianaVal[0] + medianaVal[1])/2);
 		} else {
 			mediana = medianaVal;
@@ -334,7 +371,7 @@ function calcMediana(tableObj, descriptiveClass, numElements){
 	}
 	
 }
-function calcDesvioPadrao(tableObj, descriptiveClass, numElements, media, populacaoAmostra){
+function calcDesvioPadrao(tableObj, descriptiveClass, numElements, media, populacaoAmostra){ //calcula desvio padrao
 	let somatoria = 0;
 	let desvioPadrao = 0;
 
@@ -347,7 +384,6 @@ function calcDesvioPadrao(tableObj, descriptiveClass, numElements, media, popula
 			somatoria += (Math.pow(((obj.max + obj.min) / 2) - media, 2)) * obj.qtd;
 		}
 	}
-	console.log(somatoria);
 	if(populacaoAmostra == "populacao"){
 		desvioPadrao = Math.sqrt(somatoria/numElements);
 	} else {
@@ -357,7 +393,7 @@ function calcDesvioPadrao(tableObj, descriptiveClass, numElements, media, popula
 	return Math.round(desvioPadrao * 100) / 100;
 }
 
-function callSeparatriz(){
+function callSeparatriz(){// gera os input:range de acordo com a separatriz e ja mostra valor
 	$("#sepTipo").html("");
 	$("#sepValor").html("");
 	
@@ -405,10 +441,7 @@ function callSeparatriz(){
 		$("#sepTipo").html("");
 		$("#sepValor").html("");
 		$("#sepResult").html("");
-	}
-	
-	
-	
+	}	
 	let valor = $('#rangeInput').data('slider').getValue();
 	$("#sepValor").html(valor);
 	
@@ -420,7 +453,7 @@ function callSeparatriz(){
 	});
 }
 
-function calcSeparatriz(tableObj, descriptiveClass, numElements, percentil){
+function calcSeparatriz(tableObj, descriptiveClass, numElements, percentil){ //calcula valor separatriz
 
 	let percentilPos = numElements * (percentil/100);
 	let separatriz = undefined;
@@ -442,8 +475,7 @@ function calcSeparatriz(tableObj, descriptiveClass, numElements, percentil){
 			}
 			prevFac = obj.Fac;
 		}
-	}
-	
+	}	
 	if(isNaN(separatriz)){
 		return separatriz;
 	} else {

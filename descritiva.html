@@ -17,7 +17,6 @@
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
-	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.js" integrity="sha256-59/apVFrosMLFX2dHZLGvb3nPpu7e0Yx1rsDr1dTRrk=" crossorigin="anonymous"></script>
   </head>
@@ -48,9 +47,9 @@
 	</div>
 	
 	<div id="resultTable" class="container"></div>
-	<div id="centralTendency" class="container"></div>
-	<div id="separatriz" class="container"></div>
+	<div id="centralTendency" class="container"></div>	
 	<div id="desvioPadrao" class="container"></div>
+	<div id="separatriz" class="container"></div>
 	<div id="resultChart" class="container"></div>
 	
 	<!--
@@ -73,7 +72,10 @@
 			let inputValue = document.getElementById("dataInput").value;
 			let varName = document.getElementById("dataVar").value;	
 			let populacaoAmostra = $('input[name=populacaoAmostra]:checked').val();	
-			
+			if(varName == ""){
+				varName = "Variável";
+			}
+
 			doDescriptive(inputValue, varName, populacaoAmostra);
 		}		
 	</script>

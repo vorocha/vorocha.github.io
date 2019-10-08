@@ -16,6 +16,9 @@ p {word-break: break-all;}
 	width: 25px;
 	cursor: pointer;
 }
+.inv {
+	cursor: default;
+}
 #sepTipo{
 	margin-right: 3px;
 	height: 30px;

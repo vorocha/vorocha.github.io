@@ -1,9 +1,9 @@
 function drawIntervalTable(tableObj, varName){
-	let tableElement;
-	tableElement = "<table class='table table-hover table-dark'>";
+	let tableElement;''
+	tableElement = "<div style='text-align: right;'><span style='cursor: pointer;' onclick='switchSimple(true);'><img src='img/btn_switch_simple_interval.png' width='26'/>Discreta</span></div>";
+	tableElement += "<table class='table table-hover table-dark'>";
 	tableElement += "<thead>";
 	tableElement += "<tr>";
-	tableElement += "<th scope='col'>#</th>";
 	tableElement += "<th scope='col'>" + varName + "</th>";
 	tableElement += "<th scope='col'>fi</th>";
 	tableElement += "<th scope='col'>fR%</th>";
@@ -15,7 +15,6 @@ function drawIntervalTable(tableObj, varName){
 	
 	for(let i = 0; i < tableObj.length; i++){
 		tableElement += "<tr>";
-		tableElement += "<th scope='row'>" + (i+1) +"</th>";
 		tableElement += "<td>" + tableObj[i].min + "|---" + tableObj[i].max +"</td>";
 		tableElement += "<td>" + tableObj[i].qtd + "</td>";
 		tableElement += "<td>" + tableObj[i].fRp + "%</td>";
@@ -32,10 +31,10 @@ function drawIntervalTable(tableObj, varName){
 
 function drawSimpleNumberTable(tableObj, varName){
 	let tableElement;
-	tableElement = "<table class='table table-hover table-dark'>";
+	tableElement = "<div style='text-align: right;'><span style='cursor: pointer;' onclick='switchSimple(false);'><img src='img/btn_switch_simple_interval.png' width='26'/>Contínua</span></div>";
+	tableElement += "<table class='table table-hover table-dark'>";
 	tableElement += "<thead>";
 	tableElement += "<tr>";
-	tableElement += "<th scope='col'>#</th>";
 	tableElement += "<th scope='col'>" + varName + "</th>";
 	tableElement += "<th scope='col'>fi</th>";
 	tableElement += "<th scope='col'>fR%</th>";
@@ -47,7 +46,6 @@ function drawSimpleNumberTable(tableObj, varName){
 	
 	for(let i = 0; i < tableObj.length; i++){
 		tableElement += "<tr>";
-		tableElement += "<th scope='row'>" + (i+1) +"</th>";
 		tableElement += "<td>" + tableObj[i].name +"</td>";
 		tableElement += "<td>" + tableObj[i].qtd + "</td>";
 		tableElement += "<td>" + tableObj[i].fRp + "%</td>";
@@ -67,7 +65,6 @@ function drawSimpleTextTable(tableObj, varName){
 	tableElement = "<table class='table table-hover table-dark'>";
 	tableElement += "<thead>";
 	tableElement += "<tr>";
-	tableElement += "<th scope='col'>#</th>";
 	tableElement += "<th scope='col'></th>";
 	tableElement += "<th scope='col'>" + varName + "</th>";
 	tableElement += "<th scope='col'>fi</th>";
@@ -80,13 +77,12 @@ function drawSimpleTextTable(tableObj, varName){
 	
 	for(let i = 0; i < tableObj.length; i++){
 		tableElement += "<tr>";
-		tableElement += "<th scope='row'>" + (i+1) +"</th>";
 		if(i == 0){
-			tableElement += "<td><span><img class='btn_table_text' src='img/btn_inv.png' /><img class='btn_table_text' src='img/btn_down_arrow.png' /></span></td>";
+			tableElement += "<td><span><img class='btn_table_text inv' src='img/btn_inv.png' /><img class='btn_table_text' src='img/btn_down_arrow.png' onclick='reorderDescriptive("+i+","+(i+1)+");'/></span></td>";
 		} else if(i == tableObj.length - 1){
-			tableElement += "<td><span><img class='btn_table_text' src='img/btn_up_arrow.png' /><img class='btn_table_text' src='img/btn_inv.png' /></span></td>";
+			tableElement += "<td><span><img class='btn_table_text' src='img/btn_up_arrow.png' onclick='reorderDescriptive("+i+","+(i-1)+");' /><img class='btn_table_text inv' src='img/btn_inv.png' /></span></td>";
 		} else {
-			tableElement += "<td><span><img class='btn_table_text' src='img/btn_up_arrow.png' /><img class='btn_table_text' src='img/btn_down_arrow.png' /></span></td>";
+			tableElement += "<td><span><img class='btn_table_text' src='img/btn_up_arrow.png' onclick='reorderDescriptive("+i+","+(i-1)+");' /><img class='btn_table_text' src='img/btn_down_arrow.png' onclick='reorderDescriptive("+i+","+(i+1)+");' /></span></td>";
 		}
 		tableElement += "<td>" + tableObj[i].name +"</td>";
 		tableElement += "<td>" + tableObj[i].qtd + "</td>";
@@ -127,7 +123,7 @@ function drawCentralTendencyTable(centralTendency){
 function drawSeparatrizDiv(){
 	let divElement;
 	divElement = "<form>";
-	divElement = "<fieldset class='border p-2' style='height: 120px;'><legend class='w-auto'>Medidas Separatrizes</legend>";
+	divElement += "<fieldset class='border p-2' style='height: 120px;'><legend class='w-auto'>Medidas Separatrizes</legend>";
 	divElement += "<div class='form-group input-group'>";
 	divElement += "<select id='separatrizSelect' class='form-control-sm col-3' onchange='callSeparatriz();'>";
 	divElement += "<option value='0' >Separatrizes:</option>";
