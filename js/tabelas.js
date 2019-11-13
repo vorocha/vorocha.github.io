@@ -30,8 +30,10 @@ function drawIntervalTable(tableObj, varName){
 }
 
 function drawSimpleNumberTable(tableObj, varName){
-	let tableElement;
-	tableElement = "<div style='text-align: right;'><span style='cursor: pointer;' onclick='switchSimple(false);'><img src='img/btn_switch_simple_interval.png' width='26'/>Contínua</span></div>";
+	let tableElement = "";
+	if(tableObj.length > 7){
+		tableElement = "<div style='text-align: right;'><span style='cursor: pointer;' onclick='switchSimple(false);'><img src='img/btn_switch_simple_interval.png' width='26'/>Contínua</span></div>";
+	}
 	tableElement += "<table class='table table-hover table-dark'>";
 	tableElement += "<thead>";
 	tableElement += "<tr>";

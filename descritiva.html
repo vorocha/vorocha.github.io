@@ -24,13 +24,22 @@
   <body ng-controller="MainCtrl" ng-app="spFatec">
 	<div class="container">
 		<h1>Descritiva</h1>
-	 
+		<p><a href="index.html">Voltar ao início</a>
+		<br/>
+		<form>
+			<div class="form-group">
+				<label for="csvFileInput">
+					<strong>Arquivo CSV:</strong>
+				</label>
+				<input type="file" id="csvFileInput" onchange="handleFiles(this.files)"	accept=".csv">
+			</div>
+		</form>
 		<form>
 			<div class="form-group">
 				<label for="dataInput">Valores</label>
 				<input type="text" class="form-control" id="dataInput" placeholder="Insira os valores separados por ';' (ponto e virgula)">
 			</div>
-		  <div class="form-group input-group">
+			<div class="form-group input-group">
 			<input type="text" class="form-control" id="dataVar" placeholder="Nome da Variável">
 
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -51,18 +60,7 @@
 	<div id="desvioPadrao" class="container"></div>
 	<div id="separatriz" class="container"></div>
 	<div id="resultChart" class="container"></div>
-	
-	<!--
-	<form>
-		<fieldset>
-			<label for="csvFileInput">
-				<strong>Arquivo CSV:</strong>
-			</label>
-			<input type="file" id="csvFileInput" onchange="handleFiles(this.files)"	accept=".csv">
-		</div>
-		</fieldset>
-	</form>
-	-->
+
 	
 	<script src="js/descritiva.js"></script>
 	<script src="js/graficos.js"></script>

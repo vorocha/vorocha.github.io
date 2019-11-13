@@ -488,12 +488,14 @@ function handleFiles(files) {
 	if (window.FileReader) {
 		getAsText(files[0]);
 	} else {
-		alert('Leitura de Arquivo não disponível');
+		alert('Arquivo não suportado!');
 	}
 }
 
 function getAsText(fileToRead) {
 	let reader = new FileReader();
+	
+	// Carrega a leitura do arquivo
 	reader.onload = loadHandler;
 	// Retorna possiveis erros
 	reader.onerror = errorHandler;
@@ -507,16 +509,27 @@ function loadHandler(event) {
 }
 
 function processData(csv) {
+	document.getElementById("dataInput").value = csv;
+	let fullPath = document.getElementById('csvFileInput').value;
+	if (fullPath) {
+		var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+		var filename = fullPath.substring(startIndex);
+		if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+			filename = filename.substring(1);
+		}
+		document.getElementById("dataVar").value = filename;
+	}
+	/* Se precisar lidar com linhas
 	let allTextLines = csv.split(/\r\n|\n/);
 	let lines = [];
 	while (allTextLines.length) {
 		lines.push(allTextLines.shift().split(','));
 	}
-	document.write(lines);
+	*/
 }
 
 function errorHandler(evt) {
 	if(evt.target.error.name == "NotReadableError") {
-		alert("Canno't read file !");
+		alert("Não foi possível ler o arquivo!");
 	}
 }
