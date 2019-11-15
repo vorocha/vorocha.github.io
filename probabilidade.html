@@ -16,18 +16,169 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
 	
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
   </head>
 
   <body ng-controller="MainCtrl" ng-app="spFatec">
     <div class="container">
-		<h1>Probabilidade</h1>
-		<p><a href="index.html">Voltar ao início</a>
-		<br/>
-	</div>
+      <h1>Probabilidade</h1>
+      <p><a href="index.html">Voltar ao início</a>
+      <br/>
+      <!-- ############################## BINOMIAL ##-->
+      <h3>Binomial</h3>
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control" id="amostraInput" placeholder="Quantidade da amostra (n):">
+        </div>
+        <div class="form-group input-group">
+          <input type="text" class="form-control" id="sucessoInput" placeholder="Taxa de sucesso (p):">
+          <input type="text" class="form-control" id="fracassoInput" placeholder="Taxa de fracasso (q):">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="eventosInput" placeholder="Insira os Eventos separados por ';' (ponto e virgula) (k):">
+        </div>
+        <button type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('binomial');">Calcular</button>
+      </form> 
+      <br/>
+      <div id="resultBinomial" class="container"></div>
 
-	<script src="js/probabilidade.js"></script>
+      <!-- ############################## NORMAL ##-->
+      <h3>Normal</h3>
+      <form>
+        <div class="form-group input-group">
+          <input type="text" class="form-control" id="mediaInput" placeholder="Média:">
+          <input type="text" class="form-control" id="desvioInput" placeholder="Desvio Padrão:">
+        </div>
+        <div class="form-group input-group">
+          <select id="relacaoInput" class="form-control col-3" onchange="relacaoNormal();">
+            <option selected>Escolha..</option>
+            <option value="MENOR">Menor que</option>
+            <option value="ENTRE">Entre</option>
+            <option value="MAIOR">Maior que</option>
+          </select>
+          <input type="text" class="form-control" id="valorInput" placeholder="Valor:" style="display: none;">
+          <input type="text" class="form-control" id="entreMinInput" placeholder="Valor inicial:" style="display: none;">
+          <input type="text" class="form-control" id="entreMaxInput" placeholder="Valor final:" style="display: none;">
+        </div>
+        <button type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('normal');">Calcular</button>
+      </form>
+      <script type="text/javascript">
+        function relacaoNormal(){
+          if($('#relacaoInput').val() == "MENOR" || $('#relacaoInput').val() == "MAIOR"){
+            $('#entreMinInput').hide();
+            $('#entreMaxInput').hide();
+            $('#valorInput').show();
+          } else if($('#relacaoInput').val() == "ENTRE"){
+            $('#valorInput').hide();
+            $('#entreMinInput').show();
+            $('#entreMaxInput').show();            
+          } else {
+            $('#entreMinInput').hide();
+            $('#entreMaxInput').hide();
+            $('#valorInput').hide();
+          }
+        }
+      </script>
+      <br/>
+      <div id="resultNormal" class="container"></div>
+      <div id="gaussChart" class="container"></div>
+
+      <!-- ############################## UNIFORME ##-->
+      <h3>Uniforme</h3>
+      <form>
+        <div class="form-group input-group">
+          <input type="text" class="form-control" id="minimoInput" placeholder="Ponto mínimo:">
+          <input type="text" class="form-control" id="maximoInput" placeholder="Ponto máximo:">
+        </div>
+        <div class="form-group input-group">
+          <select id="relacaoUniformeInput" class="form-control col-3" onchange="relacaoUniforme();">
+            <option selected>Escolha..</option>
+            <option value="MENOR">Menor que</option>
+            <option value="ENTRE">Entre</option>
+            <option value="MAIOR">Maior que</option>
+          </select>
+          <input type="text" class="form-control" id="valorUniformeInput" placeholder="Valor:" style="display: none;">
+          <input type="text" class="form-control" id="entreMinUniformeInput" placeholder="Valor inicial:" style="display: none;">
+          <input type="text" class="form-control" id="entreMaxUniformeInput" placeholder="Valor final:" style="display: none;">
+        </div>
+        <button type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('uniforme');">Calcular</button>
+      </form>
+      <script type="text/javascript">
+        function relacaoUniforme(){
+          if($('#relacaoUniformeInput').val() == "MENOR" || $('#relacaoUniformeInput').val() == "MAIOR"){
+            $('#entreMinUniformeInput').hide();
+            $('#entreMaxUniformeInput').hide();
+            $('#valorUniformeInput').show();
+          } else if($('#relacaoUniformeInput').val() == "ENTRE"){
+            $('#valorUniformeInput').hide();
+            $('#entreMinUniformeInput').show();
+            $('#entreMaxUniformeInput').show();            
+          } else {
+            $('#entreMinUniformeInput').hide();
+            $('#entreMaxUniformeInput').hide();
+            $('#valorUniformeInput').hide();
+          }
+        }
+      </script>
+      <br/>
+      <div id="resultUniforme" class="container"></div>
+
+    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>  
+  <script src="js/graficos.js"></script>
+  <script src="js/tabelas.js"></script>
+  <script src="js/probabilidade.js"></script>
+  <script type="text/javascript">
+    function calcProbabilidade(tipo){
+      switch (tipo) {
+        case 'binomial':
+          let nAmostra = parseFloat($('#amostraInput').val());
+          let pSucesso = parseFloat($('#sucessoInput').val());
+          let qFracasso = parseFloat($('#fracassoInput').val());
+          let kEvento = $('#eventosInput').val();
+          
+          doBinomial(nAmostra, pSucesso, qFracasso, kEvento);
+
+          break;
+        case 'normal':
+          let media = parseFloat($('#mediaInput').val());
+          let desvio = parseFloat($('#desvioInput').val());
+          let relacao = $('#relacaoInput').val();
+          let valores = [];
+          if(relacao == "MENOR" || relacao == "MAIOR"){
+            valores.push(parseFloat($('#valorInput').val()));
+          } else if(relacao == "ENTRE"){
+            valores.push(parseFloat($('#entreMinInput').val()));
+            valores.push(parseFloat($('#entreMaxInput').val()));
+          } else {
+            alert("Nenhuma relação identificada");
+            break;
+          }
+          doNormal(media, desvio, valores, relacao);
+          break;
+        case 'uniforme':
+          let minimo = parseFloat($('#minimoInput').val());
+          let maximo = parseFloat($('#maximoInput').val());
+          let relacaoUniforme = $('#relacaoUniformeInput').val();
+          let valoresUniforme = [];
+          if(relacaoUniforme == "MENOR" || relacaoUniforme == "MAIOR"){
+            valoresUniforme.push(parseFloat($('#valorUniformeInput').val()));
+          } else if(relacaoUniforme == "ENTRE"){
+            valoresUniforme.push(parseFloat($('#entreMinUniformeInput').val()));
+            valoresUniforme.push(parseFloat($('#entreMaxUniformeInput').val()));
+          } else {
+            alert("Nenhuma relação identificada");
+            break;
+          }
+          doUniforme(minimo, maximo, valoresUniforme, relacaoUniforme);
+          break;
+        default:
+          alert("Tipo de probabilidade não reconhecido!");
+      }
+    }
+  </script>
   </body>
 </html>

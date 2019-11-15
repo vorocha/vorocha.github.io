@@ -170,3 +170,76 @@ function drawIntervalChart(inputs, tableObj, varName){
 			}]
 	});
 }
+function drawGaussChart(inicioChart, fimChart, inicioArea, fimArea){
+	const lowerBound = inicioChart, upperBound = fimChart;
+
+	const normalY = (x, mean, stdDev) => Math.exp((-0.5) * Math.pow((x - mean) / stdDev, 2)) * 100000;
+
+	const getMean = (lowerBound, upperBound) => (upperBound + lowerBound) / 2;
+
+	// distance between mean and each bound of a 95% confidence interval 
+	// is 2 stdDeviation, so distance between the bounds is 4
+	const getStdDeviation = (lowerBound, upperBound) => (upperBound - lowerBound) / 4;
+
+
+
+	const generatePoints = (lowerBound, upperBound) => {
+	let stdDev = getStdDeviation(lowerBound, upperBound); 
+	let min = lowerBound - 2 * stdDev;
+	let max = upperBound + 2 * stdDev;
+	let unit = (max - min) / 100;
+	return _.range(min, max, unit);
+	}
+
+	let mean = getMean(lowerBound, upperBound);
+	let stdDev = getStdDeviation(lowerBound, upperBound);
+	let points = generatePoints(lowerBound, upperBound);
+
+
+	let seriesData = points.map(x => ({ x, y: normalY(x, mean, stdDev)}));
+
+	Highcharts.chart('gaussChart', {
+		chart: {
+			type: 'area',
+			height: 300,
+		},
+		title: {
+			text: 'Curva de Gauss',
+			y: 40
+		},
+		yAxis: {
+		labels: {
+			enabled: false,  	
+				},
+		gridLineWidth: 0,
+		title: ''
+		},
+		tooltip: {
+		enabled: false,
+		},
+		legend: {
+			enabled: false,
+			},
+		series: [{
+			data: seriesData,
+		}],
+		plotOptions: {
+			area: {
+			enableMouseTracking: false,
+			color: 'rgb(226, 119, 122)',
+			fillColor: 'rgba(226, 119, 122, 0.5)',
+			zoneAxis: 'x',
+			zones: [{
+			//fillColor gets the inside of the graph, color would change the lines
+			fillColor: 'white',
+			// everything below this value has this style applied to it
+			value: inicioArea,
+		},{
+			value: fimArea,
+		},{
+			fillColor: 'white',
+		}]
+				}
+		}
+	});
+}

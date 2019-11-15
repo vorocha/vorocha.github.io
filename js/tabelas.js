@@ -164,3 +164,66 @@ function drawDesvioPadraoTable(desvioPadrao, media){
 		
 	document.getElementById('desvioPadrao').innerHTML = tableElement;
 }
+function drawBinomialTable(propabilidade, media, desvio){
+	let tableElement;
+	tableElement = "<table class='table table-hover table-dark'>";
+	tableElement += "<thead>";
+	tableElement += "<tr>";
+	tableElement += "<th scope='col'>Probabilidade</th>";
+	tableElement += "<th scope='col'>Média</th>";
+	tableElement += "<th scope='col'>Desvio Padrão</th>";
+	tableElement += "<th scope='col'>Coeficiente de Variação</th>";
+	tableElement += "</tr>";
+	tableElement += "</thead>";
+	tableElement += "<tbody>";
+		tableElement += "<tr>";
+		tableElement += "<td>" + propabilidade +"%</td>";
+		tableElement += "<td>" + media +"</td>";
+		tableElement += "<td>" + desvio +"</td>";
+		tableElement += "<td>" + (desvio*media)*100 +"%</td>";
+		tableElement += "</tr>";
+	tableElement += "</tbody>";
+	tableElement += "</table>";
+		
+	document.getElementById('resultBinomial').innerHTML = tableElement;
+}
+function drawNormalTable(propabilidade){
+	let tableElement;
+	tableElement = "<table class='table table-hover table-dark'>";
+	tableElement += "<thead>";
+	tableElement += "<tr>";
+	tableElement += "<th scope='col'>Probabilidade</th>";
+	tableElement += "</tr>";
+	tableElement += "</thead>";
+	tableElement += "<tbody>";
+		tableElement += "<tr>";
+		tableElement += "<td>" + propabilidade +"%</td>";
+		tableElement += "</tr>";
+	tableElement += "</tbody>";
+	tableElement += "</table>";
+		
+	document.getElementById('resultNormal').innerHTML = tableElement;
+}
+function drawUniformeTable(propabilidade, media, desvio, variacao){
+	let tableElement;
+	tableElement = "<table class='table table-hover table-dark'>";
+	tableElement += "<thead>";
+	tableElement += "<tr>";
+	tableElement += "<th scope='col'>Probabilidade</th>";
+	tableElement += "<th scope='col'>Média</th>";
+	tableElement += "<th scope='col'>Desvio Padrão</th>";
+	tableElement += "<th scope='col'>Coeficiente de Variação</th>";
+	tableElement += "</tr>";
+	tableElement += "</thead>";
+	tableElement += "<tbody>";
+		tableElement += "<tr>";
+		tableElement += "<td>" + propabilidade +"%</td>";
+		tableElement += "<td>" + media +"</td>";
+		tableElement += "<td>" + desvio +"</td>";
+		tableElement += "<td>" + variacao +"%</td>";
+		tableElement += "</tr>";
+	tableElement += "</tbody>";
+	tableElement += "</table>";
+		
+	document.getElementById('resultUniforme').innerHTML = tableElement;
+}

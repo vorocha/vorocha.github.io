@@ -1,4 +1,6 @@
-function binomial(nAmostra, pSucesso, qFracasso, kEvento){// calcula binomial, inclusive com varios eventos, passados no parametro pseparados por ';'
+function doBinomial(nAmostra, pSucesso, qFracasso, kEvento){// calcula binomial, inclusive com varios eventos, passados no parametro pseparados por ';'
+    let probabilidade, media, desvio;   
+
     if(pSucesso + qFracasso == 1){
 		if(kEvento.length > 1){
 			let eventos = kEvento.split(";");
@@ -6,19 +8,24 @@ function binomial(nAmostra, pSucesso, qFracasso, kEvento){// calcula binomial, i
 			for(e of eventos){
 				resultEventos += analiseCombinatoria(nAmostra, e) * Math.pow(pSucesso, e) * Math.pow(qFracasso, nAmostra-e);
 			}
-			return resultEventos;			
+			probabilidade = resultEventos;			
 		} else {
-			return analiseCombinatoria(nAmostra, kEvento) * Math.pow(pSucesso, kEvento) * Math.pow(qFracasso, nAmostra-kEvento);
-		}
+			probabilidade = analiseCombinatoria(nAmostra, kEvento) * Math.pow(pSucesso, kEvento) * Math.pow(qFracasso, nAmostra-kEvento);
+        }
+        probabilidade = roundN(probabilidade*100, 2);
+        media = binomialMedia(nAmostra, pSucesso);
+        desvio = binomialDesvio(nAmostra, pSucesso, qFracasso);
+
+        drawBinomialTable(probabilidade, media, desvio);
     }    
 }
 
 function binomialMedia(nAmostra, pSucesso){ //calcula a Média da binomial
-	return nAmostra * pSucesso;
+	return roundN(nAmostra * pSucesso, 2);
 }
 
 function binomialDesvio(nAmostra, pSucesso, qFracasso){ //calcula o DP (desvio padrão) da binomial
-	return Math.sqrt((nAmostra * pSucesso * qFracasso));
+	return roundN(Math.sqrt((nAmostra * pSucesso * qFracasso)), 2);
 }
 
 function analiseCombinatoria(nAmostra, kEvento){ //função que realiza analise combinatória
@@ -41,9 +48,10 @@ function fatorial(num){ //calcula fatorial de um numero
     }
 }
 
-function normal(media, desvioPadrao, valores, relacao){ //calcula normal
+function doNormal(media, desvioPadrao, valores, relacao){ //calcula normal
     let z1, z2, z, areaz1, areaz2, areaz;
-		
+    let probabilidade, inicioArea, fimArea;
+    	
     for(let i = 0; i < valores.length; i++){
         valores[i] = parseFloat(valores[i]);
     }
@@ -60,53 +68,78 @@ function normal(media, desvioPadrao, valores, relacao){ //calcula normal
 
     switch (relacao) {
         case 'ENTRE':
-			if(z1 == media && z2 > media || z1 < media && z2 == media || z1 < media && z2 > media){
-				return roundN((areaz1 + areaz2)*100, 2) + " %";
+			if(z1 == media && z2 > media || z1 < media && z2 == media || z1 < media && z2 > media){                
+                probabilidade = roundN((areaz1 + areaz2)*100, 2);
 			} else if(z1 < media && z2 < media){
-				return roundN((areaz1 - areaz2)*100, 2) + " %";
+				probabilidade = roundN((areaz1 - areaz2)*100, 2);
 			} else if(z1 > media && z2 > media){
-				return roundN((areaz2 - areaz1)*100, 2) + " %";
-			}
+				probabilidade = roundN((areaz2 - areaz1)*100, 2);
+            }
+            inicioArea = z1;
+            fimArea = z2;
             break;
 		case 'MAIOR':
 			if(z >= media){
-				return roundN((0.5 - areaz)*100, 2) + " %";
+				probabilidade = roundN((0.5 - areaz)*100, 2);
 			} else if(z < media){
-				return roundN((0.5 + areaz)*100, 2) + " %";
-			}
+				probabilidade = roundN((0.5 + areaz)*100, 2);
+            }
+            inicioArea = z;
+            fimArea = media+desvioPadrao+15;
 			break;
 		case 'MENOR':
 			if(z <= media){
-				return roundN((0.5 - areaz)*100, 2) + " %";
+				probabilidade = roundN((0.5 - areaz)*100, 2);
 			} else if(z > media){
-				return roundN((0.5 + areaz)*100, 2) + " %";
-			}
+				probabilidade = roundN((0.5 + areaz)*100, 2);
+            }
+            inicioArea = media-desvioPadrao-15;
+            fimArea = z;
 			break;
         default:
             alert("Relação não identificada");
     }
+
+    drawNormalTable(probabilidade);
+    drawGaussChart(media-desvioPadrao, media+desvioPadrao, inicioArea, fimArea);
 }
 
 function roundN(num,n){
   return parseFloat(Math.round(num * Math.pow(10, n)) /Math.pow(10,n)).toFixed(n);
 }
 
-function uniforme(pMin, pMax, valor, relacao){
+function doUniforme(pMin, pMax, valores, relacao){
 	let media = (pMax + pMin)/2;
 	let desvio = roundN(Math.sqrt((Math.pow((pMax - pMin),2))/12),2);
-	let variacao = roundN((desvio/media)*100,2) + "%";
-	console.log(variacao);
+	let variacao = roundN((desvio/media)*100,2);
+    
+    let z1, z2, z, probabilidade;
+    for(let i = 0; i < valores.length; i++){
+        valores[i] = parseFloat(valores[i]);
+    }
 	
+    if(valores.length > 1){
+        z1 = valores[0];
+        z2 = valores[1];
+    } else {
+        z = valores[0];
+    }
+
 	switch (relacao) {
+        case 'ENTRE':
+            probabilidade = roundN((1*(z2 - z1))/(pMax - pMin)*100, 2);
+            break;
         case 'MAIOR':
-			return roundN((1*(pMax - valor))/(pMax - pMin)*100, 2) + " %";
+            probabilidade = roundN((1*(pMax - z))/(pMax - pMin)*100, 2);
 			break;
 		case 'MENOR':
-			return roundN((1*(valor - pMin))/(pMax - pMin)*100, 2) + " %";
+            probabilidade = roundN((1*(z - pMin))/(pMax - pMin)*100, 2);
 			break;
 	default:
             alert("Relação não identificada");
     }	
+
+    drawUniformeTable(probabilidade, media, desvio, variacao);
 }
 
 
