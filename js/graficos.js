@@ -181,8 +181,6 @@ function drawGaussChart(inicioChart, fimChart, inicioArea, fimArea){
 	// is 2 stdDeviation, so distance between the bounds is 4
 	const getStdDeviation = (lowerBound, upperBound) => (upperBound - lowerBound) / 4;
 
-
-
 	const generatePoints = (lowerBound, upperBound) => {
 	let stdDev = getStdDeviation(lowerBound, upperBound); 
 	let min = lowerBound - 2 * stdDev;
@@ -194,7 +192,6 @@ function drawGaussChart(inicioChart, fimChart, inicioArea, fimArea){
 	let mean = getMean(lowerBound, upperBound);
 	let stdDev = getStdDeviation(lowerBound, upperBound);
 	let points = generatePoints(lowerBound, upperBound);
-
 
 	let seriesData = points.map(x => ({ x, y: normalY(x, mean, stdDev)}));
 
@@ -242,4 +239,95 @@ function drawGaussChart(inicioChart, fimChart, inicioArea, fimArea){
 				}
 		}
 	});
+}
+function drawRegressaoChart(vetx, vety, a, b){
+
+	let xmin = vetx[0] - 10;
+	let outerMin = xmin - 50;
+	let xmax = vetx[vetx.length-1] + 10;
+	let outerMax = xmax + 50;
+
+	let observacoes = [];
+	for(let i = 0; i < vetx.length; i++){
+		let obs = [];
+		obs.push(vetx[i]);
+		obs.push(vety[i]);
+		observacoes.push(obs);
+	}
+
+	let regressao = [];
+	vetx.unshift(outerMin);
+	vetx.push(outerMax);
+	for(let i = 0; i < vetx.length; i++){
+		let point = [];
+		point.push(vetx[i]);
+		point.push(parseFloat(roundN(parseFloat(a) * vetx[i] + parseFloat(b),2)));
+		regressao.push(point);
+	}
+
+	Highcharts.chart('correlacaoChart', {
+		title: {
+			text: 'Regressão'
+		},
+		xAxis: {
+				title: {
+				enabled: true,
+				text: 'Valores em X'
+			},
+			startOnTick: false,
+			endOnTick: false,
+			showLastLabel: true,
+			min: xmin,
+			max: xmax
+		},
+		yAxis: {
+			title: {
+			text: 'Valores em Y'
+		  }
+		},
+		plotOptions: {
+			scatter: {
+				marker: {
+					radius: 4,
+					states: {
+						hover: {
+							enabled: true,
+							lineColor: 'rgb(200,200,100)'
+						}
+					}
+				},
+				states: {
+					hover: {
+						marker: {
+							enabled: false
+						}
+					}
+				},
+				tooltip: {
+					headerFormat: '<b>Observação</b><br>',
+					pointFormat: '(X:{point.x}, Y:{point.y})'
+				}
+			}
+		},
+		series: [{
+				type: 'scatter',
+			name: 'Observações',
+			color: 'rgba(0, 200, 0, .5)',
+			data: observacoes
+		},{
+			type: 'line',
+			name: 'Regressão',
+			data: regressao,
+			marker: {
+				enabled: false
+			},
+			states: {
+				hover: {
+					lineWidth: 1
+				}
+			},
+			enableMouseTracking: true
+		}]
+	});
+	
 }

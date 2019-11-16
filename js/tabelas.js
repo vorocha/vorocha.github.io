@@ -227,3 +227,30 @@ function drawUniformeTable(propabilidade, media, desvio, variacao){
 		
 	document.getElementById('resultUniforme').innerHTML = tableElement;
 }
+function drawCorrelacaoTable(correlacao, a, b){
+	let nivel;
+	if(correlacao >= 0 && correlacao < 30){
+		nivel = "(Inexistente à Fraca)";
+	} else if(correlacao >= 30 && correlacao < 60){
+		nivel = "(Fraca à Média)";
+	} else if(correlacao >= 60 && correlacao <= 100){
+		nivel = "(Média à Forte)";
+	}
+	let tableElement;
+	tableElement = "<table class='table table-hover table-dark'>";
+	tableElement += "<thead>";
+	tableElement += "<tr>";
+	tableElement += "<th scope='col'>Correlação</th>";
+	tableElement += "<th scope='col'>Equação</th>";
+	tableElement += "</tr>";
+	tableElement += "</thead>";
+	tableElement += "<tbody>";
+		tableElement += "<tr>";
+		tableElement += "<td>" + correlacao +"% "+ nivel +"</td>";
+		tableElement += "<td>y = " + a +".x + "+ b +"</td>";
+		tableElement += "</tr>";
+	tableElement += "</tbody>";
+	tableElement += "</table>";
+		
+	document.getElementById('correlacaoTable').innerHTML = tableElement;
+}

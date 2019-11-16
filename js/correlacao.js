@@ -24,25 +24,23 @@ function doCorrelacao(inputx, inputy){
             somaXX += vetx[i] * vetx[i];
             somaYY += vety[i] * vety[i];
         }
-        console.log(somaX);
-        console.log(somaY);
-        console.log(somaXY);
-        console.log(somaXX);
-        console.log(somaYY);
 
         let correlacao = ((obs * somaXY) - (somaX * somaY)) / Math.sqrt(((obs * somaXX - Math.pow(somaX, 2)) * ((obs * somaYY - Math.pow(somaY, 2)))));
-        console.log(roundN(correlacao,2));
+        correlacao = roundN(correlacao*100,2);
 
         let a = ((obs * somaXY) - (somaX * somaY)) / ((obs * somaXX) - Math.pow(somaX, 2));
-        console.log(roundN(a,2));
-        let yBarra = somaY / obs;
-        let xBarra = somaX / obs;
-        let b = yBarra - (a * xBarra);
-        console.log(roundN(b,2));
+        a = roundN(a,2);
 
+        let yBarra = somaY / obs;
+
+        let xBarra = somaX / obs;
+
+        let b = yBarra - (a * xBarra);
+        b = roundN(b,2);
+
+        drawCorrelacaoTable(Math.abs(correlacao), a, b);
+        drawRegressaoChart(vetx, vety, a, b);
     } else {
         alert("Há pontos não relacionados");
     }
-    
-
 }

@@ -19,17 +19,39 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </head>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+</head>
 
   <body ng-controller="MainCtrl" ng-app="spFatec">
     <div class="container">
 		<h1>Correlação</h1>
 		<p><a href="index.html">Voltar ao início</a>
-		<br/>
+    <br/>
+    <form>
+        <div class="form-group">
+          <input type="text" class="form-control" id="dataXInput" placeholder="Insira os valores de X separados por ';' (ponto e virgula)">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="dataYInput" placeholder="Insira os valores de Yseparados por ';' (ponto e virgula)">
+          </div>
+        <button type="button" class="btn btn-primary mb-2" onclick="calcCorrelacao();">Calcular</button>
+		</form>
 	</div>
+  <div id="correlacaoTable" class="container"></div>
+  <div id="correlacaoChart" class="container"></div>
 
+  <script src="js/graficos.js"></script>
+  <script src="js/tabelas.js"></script>
   <script src="js/descritiva.js"></script>
   <script src="js/probabilidade.js"></script>
   <script src="js/correlacao.js"></script>
+  <script type="text/javascript">
+    function calcCorrelacao(){
+      let inputX = document.getElementById("dataXInput").value;
+      let inputY = document.getElementById("dataYInput").value;
+
+      doCorrelacao(inputX, inputY);
+    }
+  </script>
   </body>
 </html>
