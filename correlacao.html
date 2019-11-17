@@ -28,16 +28,25 @@
 		<p><a href="index.html">Voltar ao início</a>
     <br/>
     <form>
+			<div class="form-group">
+				<label for="csvFileInput">
+					<strong>Arquivo CSV:</strong>
+				</label>
+				<input type="file" id="csvFileInput" onchange="handleFiles(this.files)"	accept=".csv">
+			</div>
+		</form>
+    <form>
         <div class="form-group">
           <input type="text" class="form-control" id="dataXInput" placeholder="Insira os valores de X separados por ';' (ponto e virgula)">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="dataYInput" placeholder="Insira os valores de Yseparados por ';' (ponto e virgula)">
+            <input type="text" class="form-control" id="dataYInput" placeholder="Insira os valores de Y separados por ';' (ponto e virgula)">
           </div>
         <button type="button" class="btn btn-primary mb-2" onclick="calcCorrelacao();">Calcular</button>
 		</form>
 	</div>
   <div id="correlacaoTable" class="container"></div>
+  <div id="newPoint" class="container"></div>
   <div id="correlacaoChart" class="container"></div>
 
   <script src="js/graficos.js"></script>

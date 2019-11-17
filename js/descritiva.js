@@ -509,7 +509,7 @@ function loadHandler(event) {
 }
 
 function processData(csv) {
-	document.getElementById("dataInput").value = csv;
+	
 	let fullPath = document.getElementById('csvFileInput').value;
 	if (fullPath) {
 		var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
@@ -517,11 +517,23 @@ function processData(csv) {
 		if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
 			filename = filename.substring(1);
 		}
-		document.getElementById("dataVar").value = filename;
+		//
 	}
-	/* Se precisar lidar com linhas
+	// 
+	/*lidar com linhas*/
 	let allTextLines = csv.split(/\r\n|\n/);
-	let lines = [];
+	let line1, line2;
+	if(allTextLines.length > 2){
+		line1 = allTextLines[0].replace(",", ".");
+		line2 = allTextLines[1].replace(",", ".");
+		document.getElementById("dataXInput").value = line1;
+		document.getElementById("dataYInput").value = line2;
+	} else {
+		line1 = allTextLines[0].replace(",", ".");
+		document.getElementById("dataVar").value = filename;
+		document.getElementById("dataInput").value = line1;
+	}
+	/*
 	while (allTextLines.length) {
 		lines.push(allTextLines.shift().split(','));
 	}

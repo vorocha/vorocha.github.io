@@ -1,13 +1,10 @@
-/* ################################### MANUAL 
-let inputx = ["300", "400", "500", "600", "700", "800"];
-let inputy = ["33", "25", "24", "18", "12", "10"];*/
-
-let inputx = "300;400;500;600;700;800";
-let inputy = "33;25;24;18;12;10";
+var vetx = [];
+var vety = [];
+var a, b;
 
 function doCorrelacao(inputx, inputy){
-    let vetx = standardize(inputx);
-    let vety = standardize(inputy);
+    vetx = standardize(inputx);
+    vety = standardize(inputy);
 
     if(vetx.length == vety.length){
         let obs = vetx.length;
@@ -28,19 +25,27 @@ function doCorrelacao(inputx, inputy){
         let correlacao = ((obs * somaXY) - (somaX * somaY)) / Math.sqrt(((obs * somaXX - Math.pow(somaX, 2)) * ((obs * somaYY - Math.pow(somaY, 2)))));
         correlacao = roundN(correlacao*100,2);
 
-        let a = ((obs * somaXY) - (somaX * somaY)) / ((obs * somaXX) - Math.pow(somaX, 2));
+        a = ((obs * somaXY) - (somaX * somaY)) / ((obs * somaXX) - Math.pow(somaX, 2));
         a = roundN(a,2);
 
         let yBarra = somaY / obs;
 
         let xBarra = somaX / obs;
 
-        let b = yBarra - (a * xBarra);
+        b = yBarra - (a * xBarra);
         b = roundN(b,2);
 
         drawCorrelacaoTable(Math.abs(correlacao), a, b);
+        drawNewPointDiv();
         drawRegressaoChart(vetx, vety, a, b);
     } else {
         alert("Há pontos não relacionados");
+    }
+}
+function newPointComplete(newValue, XorY, a, b){
+    if(XorY == 1){
+        $('#newYInput').val(parseFloat(roundN(parseFloat(a) * parseFloat(newValue) + parseFloat(b),2)));
+    } else if(XorY == 2){
+        $('#newXInput').val(parseFloat(roundN((parseFloat(newValue) - parseFloat(b)) / parseFloat(a),2)));
     }
 }

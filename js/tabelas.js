@@ -230,11 +230,11 @@ function drawUniformeTable(propabilidade, media, desvio, variacao){
 function drawCorrelacaoTable(correlacao, a, b){
 	let nivel;
 	if(correlacao >= 0 && correlacao < 30){
-		nivel = "(Inexistente à Fraca)";
+		nivel = "(Inexistente - Fraca)";
 	} else if(correlacao >= 30 && correlacao < 60){
-		nivel = "(Fraca à Média)";
+		nivel = "(Fraca - Média)";
 	} else if(correlacao >= 60 && correlacao <= 100){
-		nivel = "(Média à Forte)";
+		nivel = "(Média - Forte)";
 	}
 	let tableElement;
 	tableElement = "<table class='table table-hover table-dark'>";
@@ -253,4 +253,17 @@ function drawCorrelacaoTable(correlacao, a, b){
 	tableElement += "</table>";
 		
 	document.getElementById('correlacaoTable').innerHTML = tableElement;
+}
+function drawNewPointDiv(){
+	let divElement;
+	divElement = "<form>";
+	divElement += "<fieldset class='border p-2' style='height: 120px;'><legend class='w-auto'>Ponto Futuro</legend>";
+	divElement += "<div class='form-group input-group'>";
+	divElement += "<input type='text' class='form-control col-3' id='newXInput' onkeyup='newPointComplete(this.value, 1, a, b);' placeholder='X:'></input>";
+	divElement += "<input type='text' class='form-control col-3' id='newYInput' onkeyup='newPointComplete(this.value, 2', a, b);' placeholder='Y:'></input>";
+	divElement += "<button type='button' class='btn btn-primary mb-2' onclick='calcCorrelacao();'>Adicionar</button>";
+	divElement += "</div>";
+	divElement += "</fieldset></form>";
+	
+	document.getElementById('newPoint').innerHTML = divElement;
 }
