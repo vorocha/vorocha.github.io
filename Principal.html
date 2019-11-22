@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>INICIO</title>
+    <link rel="icon" type="image/png" href="img/icone.ico" />
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap-slider.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.js" integrity="sha256-59/apVFrosMLFX2dHZLGvb3nPpu7e0Yx1rsDr1dTRrk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+
+    <script src="js/probabilidade.js"></script>
+
+</head>
+
+<body ng-controller="MainCtrl" ng-app="spFatec" style="background: #262626;">
+
+    <div class="top">
+        <div id="top" style="padding: 0px 60px;">
+            <img src="img/Banner2.png" class="logo_menu">
+            <div style="float: right; margin-top: 10px">
+                <input type="checkbox" id="bt_menu">
+                <label for="bt_menu" class="labelMenu" onclick="btnn()">&#9776;</label>
+
+            </div>
+            <div>
+                <nav class="menu" id="menuCelular">
+                    <ul style="position: absolute;">
+                        <li><a href="index.html" id="menuSmart">Login</a></li>
+                        <li><a href="sobrenos.html" id="menuSmart">Sobre</a></li>
+                        <li><a href="contato.html" id="menuSmart">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div>
+        <div class="main-menu">
+            <ul>
+                <div id="desc" class="nav-text" onclick="removeTable()">
+                    <a href="#"><i class="fa fa-bar-chart fa-2x"></i></a>
+                    <input type="button" class="botao-menu-lateral" value="ESTATÍSTICA DESCRITIVA">
+                </div>
+                <div id="prob" class="nav-text" onclick="removeTable()">
+                    <a href="#"><i class="fa fa-percent fa-2x"></i>
+                    </a>
+                    <input type="button" class="botao-menu-lateral" value="PROBABILIDADE">
+                </div>
+                <div id="corr" class="nav-text" onclick="removeTable()">
+                    <a href="#"><i class="fa fa-area-chart fa-2x"></i>
+                    </a>
+                    <input type="button" class="botao-menu-lateral" value="CORRELAÇÃO">
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <!-- <div class="tabelas">
+        <div>
+            <div id="resultUniforme"></div>
+        </div>
+        <div>
+            <div id="resultBinomial"></div>
+        </div>
+        <div style="margin-top: -30%;">
+            <div id="resultNormal" class="container" style="min-width: 550px;"></div>
+            <div id="gaussChart" class="container" style="min-width: 550px;"></div>
+        </div>
+        <div style="margin-top: -60%;">
+            <div id="correlacaoTable" class="container"></div>
+            <div id="newPoint" class="container"></div>
+            <div id="correlacaoChart" class="container"></div>
+        </div>
+    </div> -->
+
+
+    <!--*******************************************************************************************
+                *****************                   DESCRITIVA MANUAL                **************
+                ********************************************************************************-->
+    <div id="descritivaManualDiv" class="descritiva-manual">
+
+        <i class="fa fa-bar-chart fa-2x" style="margin-top: 5%; color: white; font-size: 50px; margin-bottom: 10%;"></i>
+        <h3 class="h3Responsivo" style="font-family: monospace; color: white;font-size: 18px;">ESTATÍSTICA DESCRITIVA</h3>
+        <input id="dataVar" class="selecao-descritiva" type="text" placeholder="NOME DA VARIÁVEL">
+
+        <textarea id="dataInput" class="selecao-descritiva" style="text-align: center; resize: none; overflow-wrap: initial; height: 40px;" type="text" placeholder="DIGITE OS DADOS SEPARADOS POR ';'"></textarea>
+
+        <div style="margin-bottom: 20px" class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label style="font-size: 16px;" style="z-index: 0" class="btn btn-primary active">
+                <input type="radio" name="populacaoAmostra" value="populacao" autocomplete="off" checked>
+                População
+            </label>
+            <label style="font-size: 16px;" class="btn btn-primary">
+                <input type="radio" name="populacaoAmostra" value="amostra" autocomplete="off">
+                Amostra
+            </label>
+        </div>
+        <br>
+        <input style="font-size: 16px;" class="btn btn-primary" type="button" value="CALCULAR" id="btnDes" onclick="results()">
+        <div id="separatriz" class="container"></div>
+    </div>
+
+
+    <!--*******************************************************************************************
+                *****************                PROBABILIDADE UNIFORME              **************
+                ********************************************************************************-->
+    <div id="probabilidadeUniformeDiv" class="divProbabilidade">
+
+        <i class="fa fa-percent fa-2x" style="margin-top: 5%; color: white; font-size: 50px; margin-bottom: 5%;"></i>
+        <h3 style="font-family: monospace; color: white;font-size: 18px;">PROBABILIDADE UNIFORME</h3>
+
+        <form style="font-family: monospace; margin-top: 10px; width: 95%; display: inline-block;">
+            <div class="form-group input-group">
+                <input type="text" class="form-control" id="minimoInput" placeholder="Ponto mínimo:" style="font-size:15px;">
+                <input type="text" class="form-control" id="maximoInput" placeholder="Ponto máximo:" style="font-size:15px;">
+            </div>
+            <div class="form-group input-group" style="margin-top: 15px;">
+                <select id="relacaoUniformeInput" class="form-control col-3" onchange="relacaoUniforme();" style="max-width: max-content; font-size: 15px; background: #007bff; border: none; color: white;">
+                    <option selected>Escolha..</option>
+                    <option value="MENOR">Menor que</option>
+                    <option value="ENTRE">Entre</option>
+                    <option value="MAIOR">Maior que</option>
+                </select>
+                <input type="text" class="form-control" id="valorUniformeInput" placeholder="Valor:" style="display: none; font-size: 15px;">
+                <input type="text" class="form-control" id="entreMinUniformeInput" placeholder="Valor inicial:" style="display: none; font-size: 15px;">
+                <input type="text" class="form-control" id="entreMaxUniformeInput" placeholder="Valor final:" style="display: none; font-size: 15px;">
+            </div>
+            <button style="margin-top: 20px;" type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('uniforme');">Calcular</button>
+        </form>
+        <script type="text/javascript">
+            function relacaoUniforme() {
+                if ($('#relacaoUniformeInput').val() == "MENOR" || $('#relacaoUniformeInput').val() == "MAIOR") {
+                    $('#entreMinUniformeInput').hide();
+                    $('#entreMaxUniformeInput').hide();
+                    $('#valorUniformeInput').show();
+                } else if ($('#relacaoUniformeInput').val() == "ENTRE") {
+                    $('#valorUniformeInput').hide();
+                    $('#entreMinUniformeInput').show();
+                    $('#entreMaxUniformeInput').show();
+                } else {
+                    $('#entreMinUniformeInput').hide();
+                    $('#entreMaxUniformeInput').hide();
+                    $('#valorUniformeInput').hide();
+                }
+            }
+        </script>
+        <br />
+    </div>
+
+
+    <!--*******************************************************************************************
+                *****************                PROBABILIDADE BINOMIAL              **************
+                ********************************************************************************-->
+    <div id="probabilidadeBinomialDiv" class="divProbabilidade">
+
+        <i class="fa fa-percent fa-2x" style="margin-top: 5%; color: white; font-size: 50px; margin-bottom: 5%;"></i>
+        <h3 style="font-family: monospace; color: white;font-size: 18px;">PROBABILIDADE BINOMIAL</h3>
+
+        <form style="font-family: monospace; margin-top: 10px; width: 95%; display: inline-block;">
+            <div class="form-group">
+                <input type="text" class="form-control" id="amostraInput" placeholder="Quantidade da amostra (n):" style="font-size: 12px;">
+            </div>
+            <div class="form-group input-group" style="margin-top: 10px;">
+                <input type="text" class="form-control" id="sucessoInput" placeholder="Taxa de sucesso (p):" style="font-size: 12px;">
+                <input type="text" class="form-control" id="fracassoInput" placeholder="Taxa de fracasso (q):" style="font-size: 12px;">
+            </div>
+            <div class="form-group" style="margin-top: 15px;">
+                <input type="text" class="form-control" id="eventosInput" placeholder="Insira os Eventos separados por ';'" style="font-size: 12px; text-align: center;">
+            </div>
+            <button type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('binomial');">Calcular</button>
+        </form>
+        <br />
+    </div>
+
+    <!--***********************************************************************************************
+                *****************                 PROBABILIDADE NORMAL               **************
+                ********************************************************************************-->
+    <div id="probabilidadeNormalDiv" class="divProbabilidade">
+
+        <i class="fa fa-percent fa-2x" style="margin-top: 5%; color: white; font-size: 50px; margin-bottom: 5%;"></i>
+        <h3 style="font-family: monospace; color: white;font-size: 18px;">PROBABILIDADE NORMAL</h3>
+
+        <form style="font-family: monospace; margin-top: 10px; width: 95%; display: inline-block;">
+            <div class="form-group input-group">
+                <input type="text" class="form-control" id="mediaInput" placeholder="Média:" style="font-size: 12px;">
+                <input type="text" class="form-control" id="desvioInput" placeholder="Desvio Padrão:" style="font-size: 12px;">
+            </div>
+            <div class="form-group input-group" style="margin-top: 15px">
+                <select id="relacaoInput" class="form-control col-3" onchange="relacaoNormal();" style="max-width: max-content; font-size: 12px; background: #007bff; border: none; color: white;">
+                    <option selected>Escolha..</option>
+                    <option value="MENOR">Menor que</option>
+                    <option value="ENTRE">Entre</option>
+                    <option value="MAIOR">Maior que</option>
+                </select>
+                <input type="text" class="form-control" id="valorInput" placeholder="Valor:" style="display: none; font-size: 12px;">
+                <input type="text" class="form-control" id="entreMinInput" placeholder="Valor inicial:" style="display: none; font-size: 12px;">
+                <input type="text" class="form-control" id="entreMaxInput" placeholder="Valor final:" style="display: none; font-size: 12px;">
+            </div>
+            <button style="margin-top: 20px;" type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('normal');">Calcular</button>
+        </form>
+        <script type="text/javascript">
+            function relacaoNormal() {
+                if ($('#relacaoInput').val() == "MENOR" || $('#relacaoInput').val() == "MAIOR") {
+                    $('#entreMinInput').hide();
+                    $('#entreMaxInput').hide();
+                    $('#valorInput').show();
+                } else if ($('#relacaoInput').val() == "ENTRE") {
+                    $('#valorInput').hide();
+                    $('#entreMinInput').show();
+                    $('#entreMaxInput').show();
+                } else {
+                    $('#entreMinInput').hide();
+                    $('#entreMaxInput').hide();
+                    $('#valorInput').hide();
+                }
+            }
+        </script>
+        <br />
+
+    </div>
+
+
+    <!--***********************************************************************************************
+            *****************                 CORRELAÇÃO MANUAL               **************
+            ********************************************************************************-->
+    <div id="correlacaoManualDiv" class="descritiva-manual">
+
+        <i class="fa fa-area-chart fa-2x" style="margin-top: 5%; color: white; font-size: 50px; margin-bottom: 4%;"></i>
+        <h3 style="font-family: monospace; color: white;font-size: 18px;">CORRELAÇÃO</h3>
+
+        <form style="font-family: monospace; margin-top: 10px; width: 95%; display: inline-block;">
+            <div class="form-group">
+                <input type="text" class="form-control" id="dataXInput" placeholder="Insira os valores de X separados por ';' (ponto e virgula)">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="dataYInput" placeholder="Insira os valores de Y separados por ';' (ponto e virgula)">
+            </div>
+            <button type="button" class="btn btn-primary mb-2" onclick="calcCorrelacao();">Calcular</button>
+        </form>
+    </div>
+
+    <script src="js/correlacao.js"></script>
+    <script type="text/javascript">
+        function calcCorrelacao() {
+
+            $('#resultUniforme').hide();
+            $('#resultBinomial').hide();
+            $('#resultNormal').hide();
+            $('#gaussChart').hide();
+            $('#tabelaID').hide();
+            $('#correlacaoTable').show();
+            $('#newPoint').show();
+            $('#correlacaoChart').show();
+
+
+            let inputX = document.getElementById("dataXInput").value;
+            let inputY = document.getElementById("dataYInput").value;
+
+            doCorrelacao(inputX, inputY);
+        }
+    </script>
+
+    <!-- <div class="tabelas">
+        <div>
+            <div id="resultUniforme"></div>
+        </div>
+        <div>
+            <div id="resultBinomial"></div>
+        </div>
+        <div>
+            <div id="resultNormal" class="container" style="min-width: 550px;"></div>
+            <div id="gaussChart" class="container" style="min-width: 550px;"></div>
+        </div>
+        <div>
+            <div id="correlacaoTable" class="container"></div>
+            <div id="newPoint" class="container"></div>
+            <div id="correlacaoChart" class="container"></div>
+        </div>
+    </div> -->
+
+    <!--*******************************************************************************************
+                ********************                   TABELAS                *********************
+                ********************************************************************************-->
+
+    <div class="tabelas" id="tabelaID">
+
+        <div style="margin-top: 110px;" id="resultTable" class="container"></div>
+        <div id="centralTendency" class="container"></div>
+
+        <div id="desvioPadrao" class="container"></div>
+        <div id="resultChart" class="container"></div>
+
+        <div id="correlacaoTable" class="container"></div>
+        <div id="newPoint" class="container"></div>
+        <div id="correlacaoChart" class="container"></div>
+
+        <script src="js/descritiva.js"></script>
+        <script src="js/graficos.js"></script>
+        <script src="js/tabelas.js"></script>
+
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+
+        <script>
+            function results() {
+
+                $('#resultUniforme').hide();
+                $('#tabelaID').show();
+
+                let inputValue = document.getElementById('dataInput').value;
+                let varName = document.getElementById('dataVar').value;
+                let populacaoAmostra = $('input[name=populacaoAmostra]:checked').val();
+
+                doDescriptive(inputValue, varName, populacaoAmostra);
+            }
+
+            function resultsCsv(file) {
+                console.log(html(file.varName));
+            }
+        </script>
+    </div>
+
+    <div class="tabelas">
+        <div>
+            <div id="resultUniforme"></div>
+        </div>
+        <div>
+            <div id="resultBinomial"></div>
+        </div>
+        <div>
+            <div id="resultNormal" class="container" style="min-width: 550px;"></div>
+            <div id="gaussChart" class="container" style="min-width: 550px;"></div>
+        </div>
+        <div>
+            <div id="correlacaoTable" class="container"></div>
+            <div id="newPoint" class="container"></div>
+            <div id="correlacaoChart" class="container"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <footer>
+            &copy;EVOLUTION STATISTICS
+        </footer>
+    </div>
+    <div class="tabelas">
+        <div>
+            <div id="resultUniforme"></div>
+        </div>
+        <div>
+            <div id="resultBinomial"></div>
+        </div>
+        <div>
+            <div id="resultNormal" class="container" style="min-width: 550px;"></div>
+            <div id="gaussChart" class="container" style="min-width: 550px;"></div>
+        </div>
+        <div>
+            <div id="correlacaoTable" class="container"></div>
+            <div id="newPoint" class="container"></div>
+            <div id="correlacaoChart" class="container"></div>
+        </div>
+    </div>
+
+
+    <!--***********************************************************************************
+        ************      POP UP ENTRADA DE DADOS ESTATISTICA DESCRITIVA      *************
+        ***********************************************************************************-->
+    <nav id="pop-desc" class="pop-container">
+        <div class="pop">
+            <div style="text-align: end; margin-top: -14px; margin-right: -14px;">
+                <button class="fechar">x</button>
+            </div>
+            <h3 class="subtitulo" style="font-family: monospace; font-size: 20px; color: white;">
+                ENTRADA DE DADOS</h3>
+            <div style="text-align-last: center;">
+                <form>
+                    <div>
+                        <h4 style="color: white; font-family: monospace; font-size: 15px; font-weight: normal; margin-top: 40px;">
+                            DIGITAR MANUALMENTE OS DADOS</h4>
+                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn" value="MODO MANUAL" id="btnDescritivaManual">
+                    </div>
+                    <div style="margin-top: 50px; border-top: 1px solid #5d5c5c">
+                        <h4 style="color: white; font-family: monospace; font-size: 15px; font-weight: normal; margin-top: 45px;">
+                            IMPORTAR ARQUIVO (.csv)</h4>
+                        <input style="color: transparent; width: 100%;" type="file" id="btnDescritivaImportada" onchange="handleFiles(this.files)" accept=".csv" value="Import">
+
+                        <label style="font-size: 16px;" class="btn btn-primary" for='btnDescritivaImportada'>Selecionar um arquivo &#187;</label>
+                        <input id='btnDescritivaImportada' type='file' onchange="handleFiles(this.files)" accept=".csv" value="Import">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!--***********************************************************************************
+        ************                   POP UP PROBABILIDADE                   *************
+        ***********************************************************************************-->
+    <nav id="pop-prob" class="pop-container">
+        <div class="pop" style="height: 165px;">
+            <div style="text-align: end; margin-top: -14px; margin-right: -14px;">
+                <button class="fechar">x</button>
+            </div>
+            <div style="text-align-last: center;">
+                <form>
+
+                    <div>
+                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn" value="UNIFORME" id="btnProbUniforme">
+
+                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn" value="BINOMIAL" id="btnProbBinomial">
+
+                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn" value="NORMAL" id="btnProbNormal">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!--***********************************************************************************
+        *************                   POP UP CORRELAÇÃO                   ***************
+        ***********************************************************************************-->
+    <nav id="pop-correlacao" class="pop-container">
+        <div class="pop" style="height: 165px;">
+            <div style="text-align: end; margin-top: -14px; margin-right: -14px;">
+                <button class="fechar">x</button>
+            </div>
+            <div style="text-align-last: center; font-family: monospace;">
+                <form>
+
+                    <div style="text-align:center;">
+                        <input type="button" class="btn" value="ENTRADA MANUAL" id="btnCorreManual">
+
+                        <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv" style="color:transparent; margin-top: 20px;">
+
+                    </div>
+
+                    <label for='csvFileInput'>Selecionar um arquivo &#187;</label>
+                    <input id='csvFileInput' type='file' onchange="handleFiles(this.files)" accept=".csv">
+
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <style>
+        /* Esconde o input */
+        
+        input[type='file'] {
+            display: none
+        }
+        /* Aparência que terá o seletor de arquivo */
+        
+        label {
+            background-color: #3498db;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            margin: 20px;
+            padding: 4px 8px;
+            font-family: monospace;
+            font-size: 16px;
+        }
+    </style>
+
+</body>
+
+
+<script>
+    const descManual = document.getElementById('descritivaManualDiv');
+    /* const descImportada = document.getElementById('descritivaImportadaDiv'); */
+    const probUniforme = document.getElementById('probabilidadeUniformeDiv');
+    const probBinomial = document.getElementById('probabilidadeBinomialDiv');
+    const probNormal = document.getElementById('probabilidadeNormalDiv');
+    const corrManual = document.getElementById('correlacaoManualDiv');
+    /* const corrImportada = document.getElementById('correlacaoImportadaDiv'); */
+    const tab = document.getElementById('tabelaID');
+
+    const desc = document.getElementById('desc');
+    desc.addEventListener('click', () => iniciapop('pop-desc'));
+
+    function iniciapop(popID) {
+
+        /* ********************************************* */
+        probUniforme.classList.remove('mostrar');
+        probBinomial.classList.remove('mostrar');
+        probNormal.classList.remove('mostrar');
+        correlacaoManualDiv.classList.remove('mostrar');
+        /* correlacaoImportadaDiv.classList.remove('mostrar'); */
+        /* ********************************************* */
+
+        const popDesc = document.getElementById(popID);
+        popDesc.classList.add('mostrar');
+
+        popDesc.addEventListener('click', (e) => {
+
+            if (e.target.id == popID || e.target.className == 'fechar' || e.target.id == 'btnDescritivaManual' || e.target.id == 'btnDescritivaImportada') {
+                popDesc.classList.remove('mostrar');
+                /* tab.style.display = "none"; */
+            }
+
+            if (e.target.id == 'btnDescritivaManual') {
+                descManual.classList.add('mostrar');
+                /* descImportada.classList.remove('mostrar'); */
+                popDesc.classList.remove('mostrar');
+            }
+
+            if (e.target.id == 'btnDescritivaImportada') {
+                descManual.classList.add('mostrar');
+                /* descImportada.classList.remove('mostrar'); */
+                popDesc.classList.remove('mostrar');
+            }
+        });
+    }
+
+    const prob = document.getElementById('prob');
+    prob.addEventListener('click', () => iniciapop_Probabilidade('pop-prob'));
+
+    function iniciapop_Probabilidade(popID) {
+
+        /* ********************************************* */
+        descManual.classList.remove('mostrar');
+        /* descImportada.classList.remove('mostrar'); */
+        correlacaoManualDiv.classList.remove('mostrar');
+        /* correlacaoImportadaDiv.classList.remove('mostrar'); */
+        /* ********************************************* */
+
+
+        const popProb = document.getElementById(popID);
+        popProb.classList.add('mostrar');
+
+        popProb.addEventListener('click', (e) => {
+
+            if (e.target.id == popID || e.target.className == 'fechar' || e.target.id == 'btnProbUniforme' || e.target.id == 'btnProbBinomial' || e.target.id == 'btnProbNormal') {
+                popProb.classList.remove('mostrar');
+            }
+
+            if (e.target.id == 'btnProbUniforme') {
+                probUniforme.classList.add('mostrar');
+                probBinomial.classList.remove('mostrar');
+                probNormal.classList.remove('mostrar');
+                popProb.classList.remove('mostrar');
+            }
+
+            if (e.target.id == 'btnProbBinomial') {
+                probUniforme.classList.remove('mostrar');
+                probBinomial.classList.add('mostrar');
+                probNormal.classList.remove('mostrar');
+                popProb.classList.remove('mostrar');
+            }
+
+            if (e.target.id == 'btnProbNormal') {
+                probUniforme.classList.remove('mostrar');
+                probBinomial.classList.remove('mostrar');
+                probNormal.classList.add('mostrar');
+                popProb.classList.remove('mostrar');
+            }
+
+        });
+    }
+
+    const correlacao = document.getElementById('corr');
+    correlacao.addEventListener('click', () => iniciapop_correlacao('pop-correlacao'));
+
+    function iniciapop_correlacao(popID) {
+
+        /* ********************************************* */
+        probUniforme.classList.remove('mostrar');
+        probBinomial.classList.remove('mostrar');
+        probNormal.classList.remove('mostrar');
+        descManual.classList.remove('mostrar');
+        /* descImportada.classList.remove('mostrar'); */
+        /* ********************************************* */
+
+        const popCorr = document.getElementById(popID);
+        popCorr.classList.add('mostrar');
+
+        popCorr.addEventListener('click', (e) => {
+
+            if (e.target.id == popID || e.target.className == 'fechar' || e.target.id == 'btnCorreManual' || e.target.id == 'csvFileInput') {
+                popCorr.classList.remove('mostrar');
+            }
+
+            if (e.target.id == 'btnCorreManual') {
+                correlacaoManualDiv.classList.add('mostrar');
+                /*  correlacaoImportadaDiv.classList.remove('mostrar'); */
+                popCorr.classList.remove('mostrar');
+            }
+
+            if (e.target.id == 'csvFileInput') {
+                correlacaoManualDiv.classList.add('mostrar');
+                popCorr.classList.remove('mostrar');
+            }
+        });
+    }
+
+    var $input = document.getElementById('input-file'),
+        $fileName = document.getElementById('file-name');
+
+    function removeTable() {
+
+        $('#resultTable').html('');
+        $('#centralTendency').html('');
+        $('#desvioPadrao').html('');
+        $('#resultChart').html('');
+        $('#resultUniforme').html('');
+        $('#resultBinomial').html('');
+        $('#resultNormal').html('');
+        $('#gaussChart').html('');
+        $('#dataVar').html('');
+        $('#dataInput').html('');
+        $('#correlacaoTable').html('');
+        $('#newPoint').html('');
+        $('#correlacaoChart').html('');
+        $('#separatriz').html('');
+    }
+</script>
+
+
+<script type="text/javascript">
+    function calcProbabilidade(tipo) {
+
+        $('#resultUniforme').show();
+        $('#resultBinomial').show();
+        $('#resultNormal').show();
+        $('#gaussChart').show();
+        $('#tabelaID').hide();
+        $('#correlacaoTable').hide();
+        $('#newPoint').hide();
+        $('#correlacaoChart').hide();
+
+
+        switch (tipo) {
+            case 'binomial':
+                let nAmostra = parseFloat($('#amostraInput').val());
+                let pSucesso = parseFloat($('#sucessoInput').val());
+                let qFracasso = parseFloat($('#fracassoInput').val());
+                let kEvento = $('#eventosInput').val();
+
+                doBinomial(nAmostra, pSucesso, qFracasso, kEvento);
+
+                break;
+            case 'normal':
+                let media = parseFloat($('#mediaInput').val());
+                let desvio = parseFloat($('#desvioInput').val());
+                let relacao = $('#relacaoInput').val();
+                let valores = [];
+                if (relacao == "MENOR" || relacao == "MAIOR") {
+                    valores.push(parseFloat($('#valorInput').val()));
+                } else if (relacao == "ENTRE") {
+                    valores.push(parseFloat($('#entreMinInput').val()));
+                    valores.push(parseFloat($('#entreMaxInput').val()));
+                } else {
+                    alert("Nenhuma relação identificada");
+                    break;
+                }
+                doNormal(media, desvio, valores, relacao);
+                break;
+            case 'uniforme':
+                let minimo = parseFloat($('#minimoInput').val());
+                let maximo = parseFloat($('#maximoInput').val());
+                let relacaoUniforme = $('#relacaoUniformeInput').val();
+                let valoresUniforme = [];
+                if (relacaoUniforme == "MENOR" || relacaoUniforme == "MAIOR") {
+                    valoresUniforme.push(parseFloat($('#valorUniformeInput').val()));
+                } else if (relacaoUniforme == "ENTRE") {
+                    valoresUniforme.push(parseFloat($('#entreMinUniformeInput').val()));
+                    valoresUniforme.push(parseFloat($('#entreMaxUniformeInput').val()));
+                } else {
+                    alert("Nenhuma relação identificada");
+                    break;
+                }
+                doUniforme(minimo, maximo, valoresUniforme, relacaoUniforme);
+                break;
+            default:
+                alert("Tipo de probabilidade não reconhecido!");
+        }
+    }
+</script>
+
+<script>
+    function btnn() {
+        var check = document.getElementById("bt_menu");
+
+        if (check.checked == true) {
+            $('#menuCelular').show();
+        } else {
+            $('#menuCelular').hide();
+        }
+    }
+</script>
+<script>
+    document.onclick = function(event) {
+        var id_teste;
+        id_teste = document.getElementById("menuSmart").id;
+
+
+        /* if (event.target.id != id_teste) {
+
+            return $('#menuCelular').hide();
+        } else {
+            return alert("cliquei na div!");
+        } */
+
+    }
+</script>
+
+</html>

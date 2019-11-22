@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="icon" type="image/png" href="img/icons/favicon.ico" />
+</head>
+
+<body>
+    <div class="conteiner">
+        <div class="login">
+            <img src="img/usuario.png" class="usuario" width="100" height="100" alt="">
+            <h1 style="font-variant: all-small-caps;
+            font-size: 40px;">Login</h1>
+            <div style="text-decoration: none;
+            margin-top: 28px;
+            font-family: sans-serif;
+            font-size: 23px;
+            font-variant: all-small-caps;">
+                <p>Usuário</p>
+                <input type="text" class="input-login" style="width: 235px; text-align: center;font-size: 15px;" id="usuario" placeholder="Insira seu nome de usuário">
+                <p>Senha</p>
+                <input type="password" class="input-login" style="width: 235px; text-align: center;font-size: 15px;" id="senha" placeholder="Insira sua senha">
+                <input type="submit" name="" value="Login" class="btn-login" onclick="logar()">
+                <div style="margin-top: 20px; font-size: 15px; font-style: italic;">
+                    <a style="font-style: initial; font-size: large; color: yellow !important;" href="Principal.html" class="msg-login">Entrar como convidado</a>
+                    <br>
+                    <br>
+                    <a href="#" class="msg-login">Esqueceu sua senha?</a><br>
+                    <br>
+                    <a href="#" class="msg-login">Ainda não possui uma conta?</a>
+                </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <footer>
+            &copy;EVOLUTION STATITICS
+        </footer>
+    </div>
+</body>
+<script>
+    function logar() {
+
+        var usu = window.document.getElementById('usuario').value;
+        var sen = window.document.getElementById('senha').value;
+
+        /* window.alert(`${usu}`);
+        window.alert(`${sen}`); */
+
+        if (usu == "" && sen == "") {
+            window.alert("Um ou todos os campos estão vazios!");
+        } else if (usu == "123" && sen == "123") {
+            window.location = "Principal.html";
+        } else {
+            window.alert("Usuário e (ou) Senha incorreto(s)!")
+        }
+
+    }
+</script>
+
+</html>
