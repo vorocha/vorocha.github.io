@@ -222,6 +222,7 @@ function drawGaussChart(inicioChart, fimChart, inicioArea, fimArea){
 		}],
 		plotOptions: {
 			area: {
+				marker:{enabled: false},
 			enableMouseTracking: false,
 			color: 'rgb(226, 119, 122)',
 			fillColor: 'rgba(226, 119, 122, 0.5)',

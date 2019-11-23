@@ -356,7 +356,6 @@
         </div>
     </div>
 
-
     <!--***********************************************************************************
         ************      POP UP ENTRADA DE DADOS ESTATISTICA DESCRITIVA      *************
         ***********************************************************************************-->
@@ -365,20 +364,17 @@
             <div style="text-align: end; margin-top: -14px; margin-right: -14px;">
                 <button class="fechar">x</button>
             </div>
-            <h3 class="subtitulo" style="font-family: monospace; font-size: 20px; color: white;">
-                ENTRADA DE DADOS</h3>
+            <h3 class="subtitulo" style="font-family: monospace; font-size: 24px; color: white;">ENTRADA DE DADOS</h3>
+            <h5 style="text-align: center; color: lightskyblue; font-size: 12px;">Descritiva</h5>
             <div style="text-align-last: center;">
                 <form>
                     <div>
-                        <h4 style="color: white; font-family: monospace; font-size: 15px; font-weight: normal; margin-top: 40px;">
-                            DIGITAR MANUALMENTE OS DADOS</h4>
-                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn" value="MODO MANUAL" id="btnDescritivaManual">
+                        <h4 style="color: white; font-family: monospace; font-size: 15px; font-weight: normal; margin-top: 60px;">DIGITAR MANUALMENTE OS DADOS</h4>
+                        <input style="font-size: 16px;" type="button" class="btn btn-primary" value="Modo Manual &#187;" id="btnDescritivaManual">
                     </div>
                     <div style="margin-top: 50px; border-top: 1px solid #5d5c5c">
-                        <h4 style="color: white; font-family: monospace; font-size: 15px; font-weight: normal; margin-top: 45px;">
-                            IMPORTAR ARQUIVO (.csv)</h4>
+                        <h4 style="color: white; font-family: monospace; font-size: 15px; font-weight: normal; margin-top: 45px;">IMPORTAR ARQUIVO (.csv)</h4>
                         <input style="color: transparent; width: 100%;" type="file" id="btnDescritivaImportada" onchange="handleFiles(this.files)" accept=".csv" value="Import">
-
                         <label style="font-size: 16px;" class="btn btn-primary" for='btnDescritivaImportada'>Selecionar um arquivo &#187;</label>
                         <input id='btnDescritivaImportada' type='file' onchange="handleFiles(this.files)" accept=".csv" value="Import">
                     </div>
@@ -391,21 +387,18 @@
         ************                   POP UP PROBABILIDADE                   *************
         ***********************************************************************************-->
     <nav id="pop-prob" class="pop-container">
-        <div class="pop" style="height: 165px;">
+        <div class="pop" style="height: 185px;">
             <div style="text-align: end; margin-top: -14px; margin-right: -14px;">
                 <button class="fechar">x</button>
             </div>
             <div style="text-align-last: center;">
                 <form>
-
                     <div>
-                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn" value="UNIFORME" id="btnProbUniforme">
-
-                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn" value="BINOMIAL" id="btnProbBinomial">
-
-                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn" value="NORMAL" id="btnProbNormal">
+                        <h4 style="color: white; font-family: monospace; font-size: 24px; font-weight: normal;">PROBABILIDADE</h4>
+                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn btn-primary" value="UNIFORME" id="btnProbUniforme">
+                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn btn-primary" value="BINOMIAL" id="btnProbBinomial">
+                        <input style="margin-top: 30px; font-size: 13px;" type="button" class="btn btn-primary" value="NORMAL" id="btnProbNormal">
                     </div>
-
                 </form>
             </div>
         </div>
@@ -415,22 +408,26 @@
         *************                   POP UP CORRELAÇÃO                   ***************
         ***********************************************************************************-->
     <nav id="pop-correlacao" class="pop-container">
-        <div class="pop" style="height: 165px;">
+        <div class="pop">
             <div style="text-align: end; margin-top: -14px; margin-right: -14px;">
                 <button class="fechar">x</button>
             </div>
+            <h3 class="subtitulo" style="font-family: monospace; font-size: 24px; color: white;">ENTRADA DE DADOS</h3>
+            <h5 style="text-align: center; color: lightskyblue; font-size: 12px;">Correlação e Regressão</h5>
             <div style="text-align-last: center; font-family: monospace;">
                 <form>
-
                     <div style="text-align:center;">
-                        <input type="button" class="btn" value="ENTRADA MANUAL" id="btnCorreManual">
-
+                        <h4 style="color: white; font-family: monospace; font-size: 16px; font-weight: normal; margin-top: 50px;">DIGITAR MANUALMENTE OS DADOS</h4>
+                        <input style="font-size: 16px;" type="button" class="btn btn-primary" value="Modo Manual &#187;" id="btnCorreManual">
+                    </div>
+                    <div style="margin-top: 50px; border-top: 1px solid #5d5c5c"></div>
+                        <h4 style="color: white; font-family: monospace; font-size: 15px; font-weight: normal; margin-top: 45px;">IMPORTAR ARQUIVO (.csv)</h4>
                         <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv" style="color:transparent; margin-top: 20px;">
-
+                        <label style="font-size: 16px;" class="btn btn-primary" for='csvFileInput'>Selecionar um arquivo &#187;</label>
+                        <input id='csvFileInput' type='file' onchange="handleFiles(this.files)" accept=".csv">
                     </div>
 
-                    <label for='csvFileInput'>Selecionar um arquivo &#187;</label>
-                    <input id='csvFileInput' type='file' onchange="handleFiles(this.files)" accept=".csv">
+                    
 
                 </form>
             </div>

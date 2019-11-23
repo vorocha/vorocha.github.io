@@ -434,7 +434,15 @@ nav.main-menu.expanded {
     margin-bottom: 10px;
     width: 100%;
 }
-
+.nav-text:hover input{
+    color: lightskyblue !important;
+}
+.nav-text:hover i{
+    color: lightskyblue !important;
+}
+.main-menu a {
+    background-color: transparent !important;
+}
 h3 {
     text-align: center;
     font-family: monospace;
@@ -517,6 +525,7 @@ i {
     color: darkgray;
 }
 
+
 .tabelas {
     /* display: grid; */
     margin-left: 415px;
@@ -580,6 +589,7 @@ fieldset {
 .slider.slider-horizontal {
     width: 270px !important;
     margin-top: 20px !important;
+    margin-bottom: 20px !important;
 }
 
 .slider.slider-horizontal .slider-tick-label-container {
@@ -623,6 +633,7 @@ img {
     padding: 5px 20px;
     border-radius: 5px;
     font-size: 18px;
+    background-color: #6c757d;
 }
 
 a {
@@ -633,6 +644,7 @@ a {
 a:hover {
     color: white !important;
     text-decoration: none !important;
+    background-color: #333333;
 }
 
 .labelMenu {
@@ -698,13 +710,11 @@ ul {
     .menu ul li {
         width: 190px;
         float: none;
-        padding: 15px;
         background: #6c757d;
         text-align: center;
         cursor: pointer;
     }
     .menu ul li:hover {
-        background: #333333;
         transition: all .2s;
     }
     .menu ul ul {
@@ -726,6 +736,11 @@ ul {
     .menu a {
         font-size: 20px;
         border: none;
+        border-radius: 0px;
+        width: 190px;
+        display: inline-block;
+        height: 50px;
+        line-height: 40px;
     }
     .logo_menu {
         margin-left: -50px;

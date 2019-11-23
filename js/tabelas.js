@@ -125,7 +125,7 @@ function drawCentralTendencyTable(centralTendency){
 function drawSeparatrizDiv(){
 	let divElement;
 	divElement = "<form>";
-	divElement += "<fieldset class='border p-2' style='height: 120px;'><legend class='w-auto'>Medidas Separatrizes</legend>";
+	divElement += "<fieldset class='border p-2' style='height: auto !important;'><legend class='w-auto'>Medidas Separatrizes</legend>";
 	divElement += "<div class='form-group input-group'>";
 	divElement += "<select id='separatrizSelect' class='form-control-sm col-3' onchange='callSeparatriz();'>";
 	divElement += "<option value='0' >Separatrizes:</option>";
@@ -134,12 +134,12 @@ function drawSeparatrizDiv(){
 	divElement += "<option value='10' >Decil</option>";
 	divElement += "<option value='100' >Porcentil</option>";
 	divElement += "</select>";
-			
-	divElement += "<input id='rangeInput' type='text' style='display: none;'/>";
-			
 	divElement += "<span id='sepTipo'></span>";
 	divElement += "<span id='sepValor'></span>";
-	divElement += "<span id='sepResult'></span>";
+	divElement += "<span id='sepResult'></span>";		
+	divElement += "<input id='rangeInput' type='text' style='display: none;'/>";
+			
+	
 	divElement += "</div>";
 	divElement += "</fieldset></form>";
 	
@@ -257,10 +257,10 @@ function drawCorrelacaoTable(correlacao, a, b){
 function drawNewPointDiv(){
 	let divElement;
 	divElement = "<form>";
-	divElement += "<fieldset class='border p-2' style='height: 120px;'><legend class='w-auto'>Ponto Futuro</legend>";
+	divElement += "<fieldset class='border p-2' style='height: auto !important;'><legend class='w-auto'>Ponto Futuro</legend>";
 	divElement += "<div class='form-group input-group'>";
-	divElement += "<input type='text' class='form-control col-3' id='newXInput' onkeyup='newPointComplete(this.value, 1, a, b);' placeholder='X:'></input>";
-	divElement += "<input type='text' class='form-control col-3' id='newYInput' onkeyup='newPointComplete(this.value, 2', a, b);' placeholder='Y:'></input>";
+	divElement += "<input type='text' class='form-control col-6' id='newXInput' onkeyup='newPointComplete(this.value, 1, a, b);' placeholder='X:'></input>";
+	divElement += "<input type='text' class='form-control col-6' id='newYInput' onkeyup='newPointComplete(this.value, 2, a, b);' placeholder='Y:'></input>";
 	divElement += "</div>";
 	divElement += "</fieldset></form><br/>";
 	

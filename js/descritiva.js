@@ -510,7 +510,7 @@ function loadHandler(event) {
 
 function processData(csv) {
 	
-	let fullPath = document.getElementById('csvFileInput').value;
+	let fullPath = document.getElementById('btnDescritivaImportada').value;
 	if (fullPath) {
 		var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
 		var filename = fullPath.substring(startIndex);
