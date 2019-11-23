@@ -261,9 +261,8 @@ function drawNewPointDiv(){
 	divElement += "<div class='form-group input-group'>";
 	divElement += "<input type='text' class='form-control col-3' id='newXInput' onkeyup='newPointComplete(this.value, 1, a, b);' placeholder='X:'></input>";
 	divElement += "<input type='text' class='form-control col-3' id='newYInput' onkeyup='newPointComplete(this.value, 2', a, b);' placeholder='Y:'></input>";
-	divElement += "<button type='button' class='btn btn-primary mb-2' onclick='calcCorrelacao();'>Adicionar</button>";
 	divElement += "</div>";
-	divElement += "</fieldset></form>";
+	divElement += "</fieldset></form><br/>";
 	
 	document.getElementById('newPoint').innerHTML = divElement;
 }
