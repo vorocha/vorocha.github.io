@@ -21,19 +21,19 @@ function doCorrelacao(inputx, inputy){
             somaXX += vetx[i] * vetx[i];
             somaYY += vety[i] * vety[i];
         }
-
+        
         let correlacao = ((obs * somaXY) - (somaX * somaY)) / Math.sqrt(((obs * somaXX - Math.pow(somaX, 2)) * ((obs * somaYY - Math.pow(somaY, 2)))));
         correlacao = roundN(correlacao*100,2);
 
         a = ((obs * somaXY) - (somaX * somaY)) / ((obs * somaXX) - Math.pow(somaX, 2));
-        a = roundN(a,2);
+        a = roundN(a,4);
 
         let yBarra = somaY / obs;
 
         let xBarra = somaX / obs;
 
         b = yBarra - (a * xBarra);
-        b = roundN(b,2);
+        b = roundN(b,4);
 
         drawCorrelacaoTable(Math.abs(correlacao), a, b);
         drawNewPointDiv();

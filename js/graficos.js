@@ -242,10 +242,12 @@ function drawGaussChart(inicioChart, fimChart, inicioArea, fimArea){
 	});
 }
 function drawRegressaoChart(vetx, vety, a, b){
+	let vetSortx = vetx.slice();
+	vetSortx.sort(function(a, b){return a-b});
 
-	let xmin = vetx[0] - 10;
+	let xmin = vetSortx[0] * 0.9;
 	let outerMin = xmin - 50;
-	let xmax = vetx[vetx.length-1] + 10;
+	let xmax = vetSortx[vetSortx.length-1] * 1.1;
 	let outerMax = xmax + 50;
 
 	let observacoes = [];
@@ -257,12 +259,12 @@ function drawRegressaoChart(vetx, vety, a, b){
 	}
 
 	let regressao = [];
-	vetx.unshift(outerMin);
-	vetx.push(outerMax);
-	for(let i = 0; i < vetx.length; i++){
+	vetSortx.unshift(outerMin);
+	vetSortx.push(outerMax);
+	for(let i = 0; i < vetSortx.length; i++){
 		let point = [];
-		point.push(vetx[i]);
-		point.push(parseFloat(roundN(parseFloat(a) * vetx[i] + parseFloat(b),2)));
+		point.push(vetSortx[i]);
+		point.push(parseFloat(roundN(parseFloat(a) * vetSortx[i] + parseFloat(b),2)));
 		regressao.push(point);
 	}
 
