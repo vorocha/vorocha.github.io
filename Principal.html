@@ -33,8 +33,9 @@
         <div id="top" style="padding: 0px 60px;">
             <img src="img/Banner2.png" class="logo_menu">
             <div style="float: right; margin-top: 10px">
-                <input type="checkbox" id="bt_menu">
-                <label for="bt_menu" class="labelMenu" onclick="btnn()">&#9776;</label>
+
+                <!-- <input type="checkbox" id="labelMenu"> -->
+                <label id="labelMenu" class="labelMenu">&#9776;</label>
 
             </div>
             <div>
@@ -48,7 +49,28 @@
             </div>
         </div>
     </div>
-    </div>
+
+    <script>
+        /* $(document).on('click', function(e) {
+                                                                                                    var idt = e.target.id;
+
+                                                                                                    if (idt == "labelMenu") {
+                                                                                                        $('#menuCelular').show();
+                                                                                                    } else {
+                                                                                                        $('#menuCelular').hide();
+                                                                                                    } 
+
+                                                                                console.log(idt);
+
+                                                                                /* var check = document.getElementById("bt_menu");
+
+                                                                                if (check.checked == true) {
+                                                                                    $('#menuCelular').show();
+                                                                                } else {
+                                                                                    $('#menuCelular').hide();
+                                                                                } */
+        /* }); */
+    </script>
 
     <div>
         <div class="main-menu">
@@ -70,6 +92,9 @@
             </ul>
         </div>
     </div>
+
+
+
 
     <!-- <div class="tabelas">
         <div>
@@ -628,10 +653,7 @@
         $('#correlacaoChart').html('');
         $('#separatriz').html('');
     }
-</script>
 
-
-<script type="text/javascript">
     function calcProbabilidade(tipo) {
 
         $('#resultUniforme').show();
@@ -689,34 +711,28 @@
             default:
                 alert("Tipo de probabilidade não reconhecido!");
         }
-    }
-</script>
+    };
+    var cont = "0";
 
-<script>
-    function btnn() {
-        var check = document.getElementById("bt_menu");
+    $(document).on('click', function(e) {
+        var idt = e.target.id;
 
-        if (check.checked == true) {
+        if (cont == "1") {
+            $('#menuCelular').hide();
+            cont = "0";
+        } else if (idt == "labelMenu") {
+            cont = "1";
             $('#menuCelular').show();
         } else {
+            cont = "0";
             $('#menuCelular').hide();
         }
-    }
+
+        console.log(cont);
+    });
 </script>
-<script>
-    document.onclick = function(event) {
-        var id_teste;
-        id_teste = document.getElementById("menuSmart").id;
 
 
-        /* if (event.target.id != id_teste) {
 
-            return $('#menuCelular').hide();
-        } else {
-            return alert("cliquei na div!");
-        } */
-
-    }
-</script>
 
 </html>

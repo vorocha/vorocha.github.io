@@ -673,13 +673,17 @@ ul {
     float: right;
 }
 
+.w-auto {
+    color: white;
+}
+
 @media (min-width: 576px) {
     .container {
         max-width: none !important;
     }
 }
 
-@media(max-width: 800px) {
+@media(max-width: 768px) {
     .voltar {
         margin-right: -50px;
     }
@@ -720,7 +724,7 @@ ul {
         display: block;
     }
     .menu a {
-        font-size: 25px;
+        font-size: 20px;
         border: none;
     }
     .logo_menu {
