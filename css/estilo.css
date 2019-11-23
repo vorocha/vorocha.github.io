@@ -696,6 +696,11 @@ ul {
 }
 
 @media(max-width: 768px) {
+    .pop {
+        width: 300px;
+        min-width: auto;
+        margin: 75px 0 0 0;
+    }
     .voltar {
         margin-right: -50px;
     }
@@ -744,6 +749,7 @@ ul {
     }
     .logo_menu {
         margin-left: -50px;
+        width: 210px;
     }
     .main-menu {
         background: black;
@@ -771,9 +777,12 @@ ul {
         width: 100px;
     }
     .main-menu>ul {
-        margin-top: 7px;
         display: flex;
         font-size: x-large;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        height: 100%;
     }
     body {
         height: 95px;
@@ -813,12 +822,12 @@ ul {
     .main-menu .nav-text {
         justify-items: center;
         text-align: center;
-        margin: auto;
+        margin: 8px 0 0 0;
         display: grid;
-        width: 140px;
+        width: 33%;
     }
     .botao-menu-lateral {
-        width: 140px;
+        width: 100%;
     }
     .tabelas {
         margin-left: 0px;

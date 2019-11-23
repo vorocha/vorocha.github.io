@@ -257,10 +257,10 @@ function drawCorrelacaoTable(correlacao, a, b){
 function drawNewPointDiv(){
 	let divElement;
 	divElement = "<form>";
-	divElement += "<fieldset class='border p-2' style='height: auto !important;'><legend class='w-auto'>Ponto Futuro</legend>";
+	divElement += "<fieldset class='border p-2 col' style='height: auto !important;'><legend class='w-auto'>Ponto Futuro</legend>";
 	divElement += "<div class='form-group input-group'>";
-	divElement += "<input type='text' class='form-control col-6' id='newXInput' onkeyup='newPointComplete(this.value, 1, a, b);' placeholder='X:'></input>";
-	divElement += "<input type='text' class='form-control col-6' id='newYInput' onkeyup='newPointComplete(this.value, 2, a, b);' placeholder='Y:'></input>";
+	divElement += "<input type='text' class='form-control col' id='newXInput' onkeyup='newPointComplete(this.value, 1, a, b);' placeholder='X:'></input>";
+	divElement += "<input type='text' class='form-control col' id='newYInput' onkeyup='newPointComplete(this.value, 2, a, b);' placeholder='Y:'></input>";
 	divElement += "</div>";
 	divElement += "</fieldset></form><br/>";
 	
