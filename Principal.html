@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,9 +78,9 @@
 
         <i class="fa fa-bar-chart fa-2x" style="margin-top: 5%; color: white; font-size: 50px; margin-bottom: 10%;"></i>
         <h3 class="h3Responsivo" style="font-family: monospace; color: white;font-size: 18px;">ESTATÍSTICA DESCRITIVA</h3>
-        <input id="dataVar" class="selecao-descritiva" type="text" placeholder="NOME DA VARIÁVEL">
+        <input id="dataVar" class="form-control" type="text" placeholder="NOME DA VARIÁVEL" style="margin: auto;text-align: center;font-size: 15px;font-family: monospace; width: 94%;">
 
-        <textarea id="dataInput" class="selecao-descritiva" style="text-align: center; resize: none; overflow-wrap: initial; height: 40px;" type="text" placeholder="DIGITE OS DADOS SEPARADOS POR ';'"></textarea>
+        <textarea id="dataInput" class="form-control" style="display: inline; width: 94%; margin: 15px 0px; text-align: center; resize: none; font-size: 15px; font-family: monospace;" type="text" placeholder="DIGITE OS DADOS SEPARADOS POR ';'"></textarea>
 
         <div style="margin-bottom: 20px" class="btn-group btn-group-toggle" data-toggle="buttons">
             <label style="font-size: 16px;" style="z-index: 0" class="btn btn-primary active">
@@ -364,8 +365,8 @@
             <div style="text-align: end; margin-top: -14px; margin-right: -14px;">
                 <button class="fechar">x</button>
             </div>
-            <h3 class="subtitulo" style="font-family: monospace; font-size: 24px; color: white;">ENTRADA DE DADOS</h3>
-            <h5 style="text-align: center; color: lightskyblue; font-size: 12px;">Descritiva</h5>
+            <h3 class="subtitulo" style="font-family: monospace; font-size: 24px; color: white;">DESCRITIVA</h3>
+            <!-- <h5 style="text-align: center; color: lightskyblue; font-size: 12px;">Descritiva</h5> -->
             <div style="text-align-last: center;">
                 <form>
                     <div>
@@ -412,8 +413,8 @@
             <div style="text-align: end; margin-top: -14px; margin-right: -14px;">
                 <button class="fechar">x</button>
             </div>
-            <h3 class="subtitulo" style="font-family: monospace; font-size: 24px; color: white;">ENTRADA DE DADOS</h3>
-            <h5 style="text-align: center; color: lightskyblue; font-size: 12px;">Correlação e Regressão</h5>
+            <h3 class="subtitulo" style="font-family: monospace; font-size: 24px; color: white;">CORRELAÇÃO E REGRESSÃO</h3>
+            <!-- <h5 style="text-align: center; color: lightskyblue; font-size: 12px;">Correlação e Regressão</h5> -->
             <div style="text-align-last: center; font-family: monospace;">
                 <form>
                     <div style="text-align:center;">
@@ -421,16 +422,16 @@
                         <input style="font-size: 16px;" type="button" class="btn btn-primary" value="Modo Manual &#187;" id="btnCorreManual">
                     </div>
                     <div style="margin-top: 50px; border-top: 1px solid #5d5c5c"></div>
-                        <h4 style="color: white; font-family: monospace; font-size: 15px; font-weight: normal; margin-top: 45px;">IMPORTAR ARQUIVO (.csv)</h4>
-                        <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv" style="color:transparent; margin-top: 20px;">
-                        <label style="font-size: 16px;" class="btn btn-primary" for='csvFileInput'>Selecionar um arquivo &#187;</label>
-                        <input id='csvFileInput' type='file' onchange="handleFiles(this.files)" accept=".csv">
-                    </div>
-
-                    
-
-                </form>
+                    <h4 style="color: white; font-family: monospace; font-size: 16px; font-weight: normal; margin-top: 45px;">IMPORTAR ARQUIVO (.csv)</h4>
+                    <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv" style="color:transparent; margin-top: 20px;">
+                    <label style="font-size: 16px;" class="btn btn-primary" for='csvFileInput'>Selecionar um arquivo &#187;</label>
+                    <input id='csvFileInput' type='file' onchange="handleFiles(this.files)" accept=".csv">
             </div>
+
+
+
+            </form>
+        </div>
         </div>
     </nav>
 
@@ -675,10 +676,11 @@
         } else if (idt == "labelMenu") {
             cont = "1";
             $('#menuCelular').show();
-        } /* else {
-            cont = "0";
-            $('#menuCelular').hide();
-        } */
+        }
+        /* else {
+                   cont = "0";
+                   $('#menuCelular').hide();
+               } */
 
         console.log(cont);
     });
