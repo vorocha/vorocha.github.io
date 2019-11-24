@@ -434,15 +434,19 @@ nav.main-menu.expanded {
     margin-bottom: 10px;
     width: 100%;
 }
-.nav-text:hover input{
+
+.nav-text:hover input {
     color: lightskyblue !important;
 }
-.nav-text:hover i{
+
+.nav-text:hover i {
     color: lightskyblue !important;
 }
+
 .main-menu a {
     background-color: transparent !important;
 }
+
 h3 {
     text-align: center;
     font-family: monospace;
@@ -524,7 +528,6 @@ h3 {
 i {
     color: darkgray;
 }
-
 
 .tabelas {
     /* display: grid; */
@@ -847,7 +850,7 @@ ul {
         text-align: center;
         color: white;
         margin-top: 10px !important;
-        min-width: 515px !important;
+        /* min-width: 515px !important; */
         margin-bottom: 15px !important;
     }
     .btn {
@@ -885,7 +888,7 @@ ul {
     }
     .p-2 {
         padding: .5rem!important;
-        min-width: 490px !important;
+        /* min-width: 490px !important; */
     }
     .input-group {
         /* display: table-caption !important; */
@@ -899,7 +902,7 @@ ul {
     .slider.slider-horizontal {
         height: 20px;
         /* margin-left: auto !important; */
-        position: absolute;
+        /* position: absolute; */
         margin-top: 70px !important;
         width: 95% !important;
     }
