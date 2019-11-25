@@ -71,6 +71,18 @@
         </div>
     </div>
 
+    <div class="zoom">
+        <div style="margin-bottom: 17px;">
+            <a class="nav-text" style="background-color: transparent; margin-bottom: 0px;" href="#" id="In"><i class="fa fa-search-plus fa-2x"></i></a>
+            <!-- <input type="button" id="In" value="Zoom In" /> -->
+        </div>
+
+        <div>
+            <a class="nav-text" style="background-color: transparent; margin-bottom: 0px;" href="#" id="Out"><i class="fa fa-search-minus fa-2x"></i></a>
+            <!-- <input type="button" id="Out" value="Zoom Out" /> -->
+        </div>
+    </div>
+
     <!--*******************************************************************************************
                 *****************                   DESCRITIVA MANUAL                **************
                 ********************************************************************************-->
@@ -697,6 +709,37 @@
     setInterval(ContarSegundos, 100);
 </script>
 
+<script>
+    window.onload = function() {
+        var currFFZoom = 1;
+        var currIEZoom = 100;
+
+        $('#In').on('click', function() {
+            if (navigator.userAgent.indexOf('Firefox') != -1 && parseFloat(navigator.userAgent.substring(navigator.userAgent.indexOf('Firefox') + 8)) >= 3.6) { //Firefox
+                var step = 0.02;
+                currFFZoom += step;
+                $('body').css('MozTransform', 'scale(' + currFFZoom + ')');
+            } else {
+                var step = 2;
+                currIEZoom += step;
+                $('body').css('zoom', ' ' + currIEZoom + '%');
+            }
+        });
+
+        $('#Out').on('click', function() {
+            if (navigator.userAgent.indexOf('Firefox') != -1 && parseFloat(navigator.userAgent.substring(navigator.userAgent.indexOf('Firefox') + 8)) >= 3.6) { //Firefox
+                var step = 0.02;
+                currFFZoom -= step;
+                $('body').css('MozTransform', 'scale(' + currFFZoom + ')');
+
+            } else {
+                var step = 2;
+                currIEZoom -= step;
+                $('body').css('zoom', ' ' + currIEZoom + '%');
+            }
+        });
+    };
+</script>
 
 
 

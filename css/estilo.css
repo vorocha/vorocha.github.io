@@ -700,6 +700,15 @@ ul {
     color: white;
 }
 
+.zoom {
+    position: absolute;
+    margin-top: 300px;
+    /* width: 100%; */
+    /* text-align: end; */
+    z-index: 2000;
+    position: fixed;
+}
+
 
 /* @media (min-width: 576px) {
     .container {
@@ -713,6 +722,12 @@ ul {
         text-align: justify;
         padding: 5%;
         /* position: initial; */
+    }
+    .zoom {
+        position: absolute;
+        margin-top: 100px;
+        width: 100%;
+        text-align: end;
     }
     .pop {
         width: 300px;
@@ -791,7 +806,8 @@ ul {
         /* display: inline-flex; */
         /* place-items: baseline; */
         /* margin-bottom: 10px; */
-        width: 100px;
+        /* width: 100px; */
+        width: 60px;
     }
     .main-menu>ul {
         display: flex;

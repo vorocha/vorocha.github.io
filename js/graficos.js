@@ -244,10 +244,20 @@ function drawGaussChart(inicioChart, fimChart, inicioArea, fimArea){
 function drawRegressaoChart(vetx, vety, a, b){
 	let vetSortx = vetx.slice();
 	vetSortx.sort(function(a, b){return a-b});
-
-	let xmin = vetSortx[0] * 0.9;
+	
+	let xmin = 0
+	if(vetSortx[0] * 0.1 > 2){
+		xmin = vetSortx[0] - 2;
+	} else {
+		xmin = vetSortx[0] * 0.9;
+	}
 	let outerMin = xmin - 50;
-	let xmax = vetSortx[vetSortx.length-1] * 1.1;
+	let xmax = 0;
+	if(vetSortx[vetSortx.length-1] * 0.1 > 2){
+		xmax = vetSortx[vetSortx.length-1] + 2;
+	} else {
+		xmax = vetSortx[vetSortx.length-1] * 1.1;
+	}
 	let outerMax = xmax + 50;
 
 	let observacoes = [];
