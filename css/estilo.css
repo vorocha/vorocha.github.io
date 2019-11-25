@@ -64,7 +64,7 @@ body {
 }
 
 .alinhartexto {
-    width: 90% !important;
+    width: 85% !important;
     color: #fff;
     top: 55%;
     left: 50%;
@@ -73,6 +73,8 @@ body {
     text-align: justify;
     font-size: 18px;
     inline-size: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .login {
