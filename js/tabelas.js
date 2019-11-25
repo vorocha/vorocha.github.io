@@ -165,6 +165,7 @@ function drawDesvioPadraoTable(desvioPadrao, media){
 	document.getElementById('desvioPadrao').innerHTML = tableElement;
 }
 function drawBinomialTable(propabilidade, media, desvio){
+	let cv = roundN((desvio/media)*100, 2);
 	let tableElement;
 	tableElement = "<table class='table table-hover table-dark'>";
 	tableElement += "<thead>";
@@ -180,7 +181,7 @@ function drawBinomialTable(propabilidade, media, desvio){
 		tableElement += "<td>" + propabilidade +"%</td>";
 		tableElement += "<td>" + media +"</td>";
 		tableElement += "<td>" + desvio +"</td>";
-		tableElement += "<td>" + (desvio*media)*100 +"%</td>";
+		tableElement += "<td>" + cv +"%</td>";
 		tableElement += "</tr>";
 	tableElement += "</tbody>";
 	tableElement += "</table>";
