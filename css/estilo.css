@@ -710,7 +710,8 @@ ul {
         margin: 75px 0 0 0;
     }
     .voltar {
-        margin-right: -50px;
+        float: right;
+        margin-right: -35px;
     }
     .labelMenu {
         display: block;
@@ -756,7 +757,7 @@ ul {
         line-height: 40px;
     }
     .logo_menu {
-        margin-left: -50px;
+        margin-left: -35px;
         width: 210px;
     }
     .main-menu {
