@@ -717,6 +717,7 @@ ul {
         padding: inherit;
         margin-top: -10px;
         background-color: transparent;
+        margin-right: auto;
     }
     .menu ul li {
         width: 190px;
