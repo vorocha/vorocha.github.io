@@ -103,6 +103,10 @@ body {
     left: 142px;
 }
 
+.container {
+    min-width: 320px !important;
+}
+
 .container2 {
     width: 100%;
     min-height: 100vh;
@@ -843,7 +847,8 @@ ul {
     .tabelas {
         margin-left: 0px;
         margin-bottom: 10px;
-        margin-top: 85px;
+        margin-top: 25px;
+        padding: 0;
     }
     .top {
         position: relative;
