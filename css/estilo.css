@@ -748,7 +748,7 @@ ul {
         margin-right: -55px;
         display: none;
         margin-top: 95px;
-        margin-right: -198px;
+        margin-right: -203px;
         contain: size;
     }
     #bt_menu:checked~.menu {
@@ -917,7 +917,7 @@ ul {
         margin-left: 3%!important;
     }
     .menu {
-        margin-top: 5px;
+        margin-top: 15px;
     }
     #sepTipo {
         margin-left: auto !important;

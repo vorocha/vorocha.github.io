@@ -666,24 +666,35 @@
         }
     };
     var cont = "0";
+    $('#menuCelular').hide();
 
     $(document).on('click', function(e) {
         var idt = e.target.id;
 
-        if (cont == "1") {
-            $('#menuCelular').hide();
-            cont = "0";
-        } else if (idt == "labelMenu") {
+
+        if (idt == "labelMenu" && cont == 0) {
             cont = "1";
             $('#menuCelular').show();
+        } else if (idt == "labelMenu" && cont == 1) {
+            cont = "0";
+            $('#menuCelular').hide();
+        } else if (idt != "labelMenu" && cont == 1) {
+            $('#menuCelular').hide();
+            cont = "0";
         }
-        /* else {
-                   cont = "0";
-                   $('#menuCelular').hide();
-               } */
 
         console.log(cont);
+
     });
+
+
+    function ContarSegundos() {
+        var w = screen.width;
+        if (w > 768) {
+            $('#menuCelular').show();
+        }
+    }
+    setInterval(ContarSegundos, 100);
 </script>
 
 
