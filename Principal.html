@@ -80,7 +80,7 @@
         <h3 class="h3Responsivo" style="font-family: monospace; color: white;font-size: 18px;">ESTATÍSTICA DESCRITIVA</h3>
         <input id="dataVar" class="form-control" type="text" placeholder="NOME DA VARIÁVEL" style="margin: auto;text-align: center;font-size: 15px;font-family: monospace; width: 94%;">
 
-        <textarea id="dataInput" class="form-control" style="display: inline; width: 94%; margin: 15px 0px; text-align: center; resize: none; font-size: 15px; font-family: monospace;" type="text" placeholder="DIGITE OS DADOS SEPARADOS POR ';'"></textarea>
+        <textarea id="dataInput" class="form-control" style="display: inline; width: 94%; margin: 15px 0px; text-align: center; /* resize: none; */ font-size: 15px; font-family: monospace; height: 38px;" type="text" placeholder="DIGITE OS DADOS SEPARADOS POR ';'"></textarea>
 
         <div style="margin-bottom: 20px" class="btn-group btn-group-toggle" data-toggle="buttons">
             <label style="font-size: 16px;" style="z-index: 0" class="btn btn-primary active">
@@ -477,7 +477,7 @@
         probUniforme.classList.remove('mostrar');
         probBinomial.classList.remove('mostrar');
         probNormal.classList.remove('mostrar');
-        correlacaoManualDiv.classList.remove('mostrar');
+        corrManual.classList.remove('mostrar');
         /* correlacaoImportadaDiv.classList.remove('mostrar'); */
         /* ********************************************* */
 
@@ -513,7 +513,7 @@
         /* ********************************************* */
         descManual.classList.remove('mostrar');
         /* descImportada.classList.remove('mostrar'); */
-        correlacaoManualDiv.classList.remove('mostrar');
+        corrManual.classList.remove('mostrar');
         /* correlacaoImportadaDiv.classList.remove('mostrar'); */
         /* ********************************************* */
 
@@ -574,13 +574,13 @@
             }
 
             if (e.target.id == 'btnCorreManual') {
-                correlacaoManualDiv.classList.add('mostrar');
+                corrManual.classList.add('mostrar');
                 /*  correlacaoImportadaDiv.classList.remove('mostrar'); */
                 popCorr.classList.remove('mostrar');
             }
 
             if (e.target.id == 'csvFileInput') {
-                correlacaoManualDiv.classList.add('mostrar');
+                corrManual.classList.add('mostrar');
                 popCorr.classList.remove('mostrar');
             }
         });
