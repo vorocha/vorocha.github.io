@@ -64,17 +64,13 @@ body {
 }
 
 .alinhartexto {
-    width: 85% !important;
-    color: #fff;
-    top: 55%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
+    color: white;
     text-align: justify;
-    font-size: 18px;
-    inline-size: auto;
-    margin-top: 20px;
-    margin-bottom: 40px;
+    padding: 5%;
+    position: fixed;
+    top: 24%;
+    left: 6%;
+    right: 6%;
 }
 
 .login {
@@ -536,6 +532,7 @@ i {
     margin-bottom: 10px;
     text-align: center;
     display: flow-root !important;
+    padding: 15px;
 }
 
 .tabelasProbabilidade {
@@ -699,13 +696,20 @@ ul {
     margin: 0 !important;
 }
 
-@media (min-width: 576px) {
+
+/* @media (min-width: 576px) {
     .container {
         max-width: none !important;
     }
-}
+} */
 
 @media(max-width: 768px) {
+    .alinhartexto {
+        color: white;
+        text-align: justify;
+        padding: 5%;
+        position: initial;
+    }
     .pop {
         width: 300px;
         min-width: auto;
