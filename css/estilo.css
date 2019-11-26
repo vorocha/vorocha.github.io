@@ -72,7 +72,7 @@ body {
     color: white;
     text-align: justify;
     padding: 5%;
-    position: fixed;
+    /* position: fixed; */
     top: 24%;
     left: 6%;
     right: 6%;
