@@ -90,9 +90,9 @@
 
         <i class="fa fa-bar-chart fa-2x" style="margin-top: 5%; color: white; font-size: 50px; margin-bottom: 10%;"></i>
         <h3 class="h3Responsivo" style="font-family: monospace; color: white;font-size: 18px;">ESTATÍSTICA DESCRITIVA</h3>
-        <input id="dataVar" class="form-control" type="text" placeholder="NOME DA VARIÁVEL" style="margin: auto;text-align: center;font-size: 15px;font-family: monospace; width: 94%;">
+        <input id="dataVar" class="form-control" type="text" placeholder="NOME DA VARIÁVEL" style="margin: auto;text-align: center;font-size: 14px;font-family: monospace; width: 94%;">
 
-        <textarea id="dataInput" class="form-control" style="display: inline; width: 94%; margin: 15px 0px; text-align: center; /* resize: none; */ font-size: 15px; font-family: monospace; height: 38px;" type="text" placeholder="DIGITE OS DADOS SEPARADOS POR ';'"></textarea>
+        <textarea id="dataInput" class="form-control" style="display: inline; width: 94%; margin: 15px 0px; text-align: center; /* resize: none; */ font-size: 14px; font-family: monospace; height: 38px;" type="text" placeholder="DIGITE OS DADOS SEPARADOS POR ';'"></textarea>
 
         <div style="margin-bottom: 20px" class="btn-group btn-group-toggle" data-toggle="buttons">
             <label style="font-size: 16px;" style="z-index: 0" class="btn btn-primary active">
@@ -120,21 +120,21 @@
 
         <form style="font-family: monospace; margin-top: 10px; width: 95%; display: inline-block;">
             <div class="form-group input-group">
-                <input type="text" class="form-control" id="minimoInput" placeholder="Ponto mínimo:" style="font-size:15px;">
-                <input type="text" class="form-control" id="maximoInput" placeholder="Ponto máximo:" style="font-size:15px;">
+                <input type="text" class="form-control" id="minimoInput" placeholder="Ponto mínimo:" style="font-size:14px;">
+                <input type="text" class="form-control" id="maximoInput" placeholder="Ponto máximo:" style="font-size:14px;">
             </div>
             <div class="form-group input-group" style="margin-top: 15px;">
-                <select id="relacaoUniformeInput" class="form-control col-3" onchange="relacaoUniforme();" style="max-width: max-content; font-size: 15px; background: #007bff; border: none; color: white;">
+                <select id="relacaoUniformeInput" class="form-control col-3" onchange="relacaoUniforme();" style="max-width: max-content; font-size: 14px; background: #007bff; border: none; color: white;">
                     <option selected>Escolha..</option>
                     <option value="MENOR">Menor que</option>
                     <option value="ENTRE">Entre</option>
                     <option value="MAIOR">Maior que</option>
                 </select>
-                <input type="text" class="form-control" id="valorUniformeInput" placeholder="Valor:" style="display: none; font-size: 15px;">
-                <input type="text" class="form-control" id="entreMinUniformeInput" placeholder="Valor inicial:" style="display: none; font-size: 15px;">
-                <input type="text" class="form-control" id="entreMaxUniformeInput" placeholder="Valor final:" style="display: none; font-size: 15px;">
+                <input type="text" class="form-control" id="valorUniformeInput" placeholder="Valor:" style="display: none; font-size: 14px;">
+                <input type="text" class="form-control" id="entreMinUniformeInput" placeholder="Valor inicial:" style="display: none; font-size: 14px;">
+                <input type="text" class="form-control" id="entreMaxUniformeInput" placeholder="Valor final:" style="display: none; font-size: 14px;">
             </div>
-            <button style="margin-top: 20px;" type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('uniforme');">Calcular</button>
+            <button style="margin-top: 20px; font-size: 14px;" type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('uniforme');" >Calcular</button>
         </form>
         <script type="text/javascript">
             function relacaoUniforme() {
@@ -170,8 +170,10 @@
                 <input type="text" class="form-control" id="amostraInput" placeholder="Quantidade da amostra (n):" style="font-size: 12px;">
             </div>
             <div class="form-group input-group" style="margin-top: 10px;">
-                <input type="text" class="form-control" id="sucessoInput" placeholder="Taxa de sucesso (p):" style="font-size: 12px;">
-                <input type="text" class="form-control" id="fracassoInput" placeholder="Taxa de fracasso (q):" style="font-size: 12px;">
+                <input type="text" class="form-control" id="sucessoInput" placeholder="Taxa de sucesso (p):" style="font-size: 12px;padding: 2px;
+                text-align: center;">
+                <input type="text" class="form-control" id="fracassoInput" placeholder="Taxa de fracasso (q):" style="font-size: 12px;padding: 2px;
+                text-align: center;">
             </div>
             <div class="form-group" style="margin-top: 15px;">
                 <input type="text" class="form-control" id="eventosInput" placeholder="Insira os Eventos separados por ';'" style="font-size: 12px; text-align: center;">
@@ -205,7 +207,7 @@
                 <input type="text" class="form-control" id="entreMinInput" placeholder="Valor inicial:" style="display: none; font-size: 12px;">
                 <input type="text" class="form-control" id="entreMaxInput" placeholder="Valor final:" style="display: none; font-size: 12px;">
             </div>
-            <button style="margin-top: 20px;" type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('normal');">Calcular</button>
+            <button style="margin-top: 20px; font-size: 14px;" type="button" class="btn btn-primary mb-2" onclick="calcProbabilidade('normal');">Calcular</button>
         </form>
         <script type="text/javascript">
             function relacaoNormal() {
@@ -239,12 +241,14 @@
 
         <form style="font-family: monospace; margin-top: 10px; width: 95%; display: inline-block;">
             <div class="form-group">
-                <input type="text" class="form-control" id="dataXInput" placeholder="Insira os valores de X separados por ';' (ponto e virgula)">
+                <input type="text" class="form-control" id="dataXInput" placeholder="Insira os valores de X separados por ';'"
+                style="font-size: 13px; padding: 2px; text-align: center;">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="dataYInput" placeholder="Insira os valores de Y separados por ';' (ponto e virgula)">
+                <input type="text" class="form-control" id="dataYInput" placeholder="Insira os valores de Y separados por ';'"
+                style="font-size: 13px; padding: 2px; text-align: center;">
             </div>
-            <button type="button" class="btn btn-primary mb-2" onclick="calcCorrelacao();">Calcular</button>
+            <button type="button" class="btn btn-primary mb-2" onclick="calcCorrelacao();" style="font-size: 14px;">Calcular</button>
         </form>
     </div>
 

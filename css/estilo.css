@@ -541,7 +541,9 @@ i {
     margin-bottom: 10px;
     text-align: center;
     display: flow-root !important;
-    padding: 15px;
+    /*padding: 10px; */
+    /* width: auto; */
+    align-items: center;
 }
 
 .tabelasProbabilidade {
@@ -715,6 +717,12 @@ ul {
         max-width: none !important;
     }
 } */
+
+.highcharts-container {
+    display: flex !important;
+    /* width: 629px !important; */
+    width: 100% !important;
+}
 
 @media(max-width: 768px) {
     .alinhartexto {
