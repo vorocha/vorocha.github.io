@@ -732,7 +732,7 @@ ul {
         /* position: initial; */
     }
     .zoom {
-        position: absolute;
+        /* position: absolute; */
         margin-top: 100px;
         width: 100%;
         text-align: end;
@@ -785,6 +785,7 @@ ul {
         display: inline-block;
         height: 50px;
         line-height: 40px;
+        min-width: 320px;
     }
     .logo_menu {
         width: 185px;
@@ -794,12 +795,13 @@ ul {
     .main-menu {
         background: black;
         border-bottom: 1px solid white;
-        position: fixed;
+        /* position: fixed; */
         width: 100%;
         height: 90px;
         border-right: none;
         z-index: 40;
         position: absolute;
+        min-width: 320px;
     }
     .main-menu:hover,
     nav.main-menu.expanded {
